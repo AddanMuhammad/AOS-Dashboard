@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import { Button, Layout, Menu, theme } from 'antd';
+import { Button, Layout, theme } from 'antd';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Logo from './components/Logo';
 import MenuList from './components/MenuList';
 import ToggleThemeButton from './components/ToggleThemeButton';
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import Home from './Home';
+import Create from './Create';
+import Details from './Details';
 
-const { Header, Sider } = Layout;
+const { Header, Sider, Content } = Layout;
+
 
 
 function App() {
@@ -14,28 +19,75 @@ function App() {
 
   const toggleTheme = () => {
     setDarkTheme(!darkTheme);
-  }
+  };
 
   const {
-    token: { colorBgContainer }
+    token: { colorBgContainer },
   } = theme.useToken();
 
   return (
-
-    <Layout>
-      <Sider collapsed={collapsed} collapsible trigger={null} theme={darkTheme ? 'dark' : 'light'} className='sidebar'>
-        <Logo />
-        <MenuList darkTheme={darkTheme} />
-        <ToggleThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
-      </Sider>
+    <Router>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button type='text' className='toggle' onClick={() => setCollapsed(!collapsed)} icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} />
-        </Header>
-      </Layout>
-    </Layout>
+        <Sider
+          collapsed={collapsed}
+          collapsible
+          trigger={null}
+          theme={darkTheme ? 'dark' : 'light'}
+          className='sidebar'
+        >
 
-  )
+          <Logo darkTheme={darkTheme} collapsed={collapsed} />
+          <MenuList darkTheme={darkTheme} />
+          <ToggleThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
+        </Sider>
+        <Layout>
+          <Header
+            style={{
+              padding: 0,
+              background: colorBgContainer,
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                paddingLeft: '16px',
+              }}
+            >
+              <Button
+                type='text'
+                className='toggle'
+                onClick={() => setCollapsed(!collapsed)}
+                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              />
+              <span
+                style={{
+                  marginLeft: '10px',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                }}
+              >
+                Hello Farmer👋,
+              </span>
+            </div>
+          </Header>
+          <Content
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              background: colorBgContainer,
+            }}
+          >
+            <Routes>
+              <Route path='/home' element={<Home />} />
+              <Route path='/create' element={<Create />} />
+              <Route path='/details' element={<Details />} />
+            </Routes>
+          </Content>
+        </Layout>
+      </Layout>
+    </Router>
+  );
 }
 
-export default App
+export default App;

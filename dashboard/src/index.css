@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Monoton:wght@200;300;400;500;600;700;800&display=swap');
 
+/* Global */
 * {
   margin: 0;
   padding: 0;
@@ -10,28 +11,47 @@
   font-family: 'Poppins', sans-serif;
 }
 
+
+/* SideBar */
 .sidebar {
   color: #fff;
+  min-height: 100vh;
 }
 
-.logo {
+
+/* Logo */
+.logo-container {
   display: flex;
   align-items: center;
+  gap: 5px;
+  padding: 20px 10px 20px 10px;
+}
+
+.logo-container.collapsed {
   justify-content: center;
-  color: #fff;
   padding: 10px;
 }
 
 .logo-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   background: rgba(28, 17, 41, 0.88);
+  border-radius: 50%;
+  color: #fff;
 }
 
+.logo-text {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+
+/* MenuBar */
 .menu-bar {
   height: 88vh;
   margin-top: 2rem;
@@ -42,6 +62,8 @@
   position: relative;
 }
 
+
+/* Toggle */
 .toggle-theme-btn {
   position: absolute;
   bottom: 30px;
