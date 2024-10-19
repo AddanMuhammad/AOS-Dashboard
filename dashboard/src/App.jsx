@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Layout, theme } from 'antd';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Logo from './components/Logo';
 import MenuList from './components/MenuList';
 import ToggleThemeButton from './components/ToggleThemeButton';
@@ -73,12 +73,12 @@ function App() {
           </Header>
           <Content
             style={{
-              margin: '24px 16px',
               padding: 24,
               background: colorBgContainer,
             }}
           >
             <Routes>
+            <Route path='/' element={<Navigate to='/home' />} />
               <Route path='/home' element={<Home />} />
               <Route path='/create' element={<Create />} />
               <Route path='/details' element={<Details />} />
