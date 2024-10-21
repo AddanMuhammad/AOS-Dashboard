@@ -331,7 +331,7 @@ main.table {
 
 .table__header .input-group {
   width: 35%;
-  height: 80%;
+  height: 100%;
   background-color: rgba(231, 231, 231, 0.333);
   padding: 0 .8rem;
   border-radius: 2rem;
@@ -653,5 +653,44 @@ tbody td.sticky-action {
 
 .action-btn:hover {
   opacity: 0.8;
+}
+
+
+
+
+/* Modal Styles */
+
+.modal-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+
+.input-wrapper label {
+  font-size: 10px;
+  margin-bottom: 8px;
+  color: #333;
+  /* font-weight: bold; */
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 15px;  
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  height: 40px; /* Increased height */
 }
 

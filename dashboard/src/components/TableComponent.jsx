@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// import SearchBar from './SearchBar';
-import { SearchOutlined, EditOutlined, DeleteOutlined, EyeOutlined, DownloadOutlined  } from '@ant-design/icons';
-import { Button } from 'antd';
+import { SearchOutlined, EditOutlined, DeleteOutlined, EyeOutlined, DownloadOutlined } from '@ant-design/icons';
+import { Button, Modal, Input } from 'antd';
+import { toast } from 'react-toastify';
 
 const initialData = [
     {
@@ -133,19 +133,60 @@ const initialData = [
 
 function TableComponent() {
 
+  const [data, setData] = useState(initialData);
+    const [search, setSearch] = useState("");
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
 
 
+  // Function to open the modal and set the selected row data
+  const showModal = (row) => {
+    setSelectedRow(row);
+    setIsModalOpen(true);
+  };
 
+  // Function to close the modal
+  const handleOk = () => {
+    // Update the data array with the edited row
+    const updatedData = data.map((item) =>
+      item.id === selectedRow.id ? selectedRow : item
+    );
+    setData(updatedData);
+    setIsModalOpen(false);
+    setSelectedRow(null); // Clear selected data when modal closes
 
+    // Show success notification
+    toast.success(
+      'Record update successfully!',
+      
+    );
+  };
 
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setSelectedRow(null);
+  };
 
+  // Function to handle form input change inside the modal
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedRow((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    const [data, setData] = useState(initialData);
-    
-  const [search, setSearch] = useState("");
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  // Function to delete a row
+  const handleDelete = (id) => {
+    const updatedData = data.filter(item => item.id !== id);
+    setData(updatedData);
+    toast.error('Record deleted successfully!');
+};
 
-  // Filtered and searched data
+  
+
+  // Update logic for filtered and sorted data remains the same
   const filteredData = data.filter((item) =>
     Object.values(item)
       .join(" ")
@@ -180,160 +221,159 @@ function TableComponent() {
     link.download = "customer_orders.csv";
     link.click();
   };
+  
+  return (
+    <main className="table">
+        <section className="table__header">
+            <h1>Customer Orders</h1>
+            <div className="input-group">
+                <input
+                    type="search"
+                    placeholder="Search Data..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+                <span>
+                    <SearchOutlined style={{ fontSize: '24px' }} />
+                </span>
+            </div>
+            <div className="export__file">
+                <Button type="primary" shape="round" icon={<DownloadOutlined />} onClick={exportToCSV}>
+                    Download
+                </Button>
+            </div>
+        </section>
+        <section className="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        {headers.map((header) => (
+                            <th key={header.key} onClick={() => sortTable(header.key)} className={header.key === 'actions' ? 'sticky-action' : ''}>
+                                {header.label}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {filteredData.map((row) => (
+                        <tr key={row.id}>
+                            {headers.map((header) =>
+                                header.key !== "actions" ? (
+                                    <td key={header.key}>{row[header.key]}</td>
+                                ) : (
+                                    <td key={header.key} className="sticky-action">
+                                        <button className="action-btn view-btn"><EyeOutlined /></button>
+                                        <button className="action-btn edit-btn" onClick={() => showModal(row)}><EditOutlined /></button>
+                                        <button className="action-btn delete-btn" onClick={() => handleDelete(row.id)}><DeleteOutlined /></button>
+                                    </td>
+                                )
+                            )}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </section>
 
+        {/* Modal for editing */}
+        {selectedRow && (
+            <Modal
+                title="Edit Customer"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <div className="modal-content">
+                    {/* First row of fields */}
+                    <div className="input-group">
+                        <div className="input-wrapper">
+                            <label>Customer Name</label>
+                            <Input
+                                name="customer"
+                                value={selectedRow.customer}
+                                onChange={handleInputChange}
+                                placeholder="Customer Name"
+                            />
+                        </div>
+                        <div className="input-wrapper">
+                            <label>Location</label>
+                            <Input
+                                name="location"
+                                value={selectedRow.location}
+                                onChange={handleInputChange}
+                                placeholder="Location"
+                            />
+                        </div>
+                    </div>
 
+                    {/* Second row of fields */}
+                    <div className="input-group">
+                        <div className="input-wrapper">
+                            <label>Phone Number</label>
+                            <Input
+                                name="phone"
+                                value={selectedRow.phone}
+                                onChange={handleInputChange}
+                                placeholder="Phone Number"
+                            />
+                        </div>
+                        <div className="input-wrapper">
+                            <label>CNIC</label>
+                            <Input
+                                name="cnic"
+                                value={selectedRow.cnic}
+                                onChange={handleInputChange}
+                                placeholder="CNIC"
+                            />
+                        </div>
+                    </div>
 
+                    {/* Third row of fields */}
+                    <div className="input-group">
+                        <div className="input-wrapper">
+                            <label>Date</label>
+                            <Input
+                                name="date"
+                                value={selectedRow.date}
+                                onChange={handleInputChange}
+                                placeholder="Date"
+                            />
+                        </div>
+                        <div className="input-wrapper">
+                            <label>Status</label>
+                            <Input
+                                name="status"
+                                value={selectedRow.status}
+                                onChange={handleInputChange}
+                                placeholder="Status"
+                            />
+                        </div>
+                    </div>
 
-//   return (
-//     <main className="table">
-//       <section className="table__header">
-//         <h1>Customer Orders</h1>
-//         <div className="input-group">
-//           <input
-//             type="search"
-//             placeholder="Search Data..."
-//             value={search}
-//             onChange={(e) => setSearch(e.target.value)}
-//             style={{
-//               height: '50px',
-//               padding: '10px',
-//               fontSize: '16px',
-              
-//             }}
-//           />
-//           <span style={{ height: '40px', paddingRight: '10px', display: 'flex', alignItems: 'center' }}>
-//         <SearchOutlined style={{ fontSize: '24px' }} />
-//       </span>
-//           {/* <SearchBar search={search} setSearch={setSearch}/> */}
-          
-//         </div>
-//         <div className="export__file">
-//           <button onClick={exportToCSV}>Export to CSV</button>
-//         </div>
-//       </section>
-//       <section className="table__body">
-//         {/* <table>
-//           <thead>
-//             <tr>
-//               {["sr.", "Grw.code", "Grw.name", "father name", "september", "ratoon", "february", "total", "phone", "cnic", "area"].map((header) => (
-//                 <th key={header} onClick={() => sortTable(header)}>
-//                   {header.charAt(0).toUpperCase() + header.slice(1)}
-//                   <span className={`icon-arrow ${sortConfig.key === header ? sortConfig.direction : ""}`}>&UpArrow;</span>
-//                 </th>
-//               ))}
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {filteredData.map((row) => (
-//               <tr key={row.id}>
-//                 <td>{row.id}</td>
-//                 <td>
-                
-//                   {row.customer}
-//                 </td>
-//                 <td>{row.location}</td>
-//                 <td>{row.date}</td>
-//                 <td>
-//                   <p className={`status ${row.status}`}>{row.status}</p>
-//                 </td>
-//                 <td>
-//                   <strong>{row.amount}</strong>
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table> */}
-
-
-// <table>
-//           <thead>
-//             <tr>
-//               {headers.map((header) => (
-//                 <th key={header.key} onClick={() => sortTable(header.key)}>
-//                   {header.label.charAt(0).toUpperCase() + header.label.slice(1)}
-//                   {/* <span className={`icon-arrow ${sortConfig.key === header.key ? sortConfig.direction : ""}`}>&UpArrow;</span> */}
-//                 </th>
-//               ))}
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {filteredData.map((row) => (
-//               <tr key={row.id}>
-//                 {headers.map((header) => (
-//                   <td key={header.key}>
-//                     {row[header.key]}
-//                   </td>
-//                 ))}
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </section>
-//     </main>
-//   )
-
-
-return (
-  <main className="table">
-    <section className="table__header">
-      <h1>Customer Orders</h1>
-      <div className="input-group">
-        <input
-          type="search"
-          placeholder="Search Data..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{
-            height: '50px',
-            padding: '10px',
-            fontSize: '16px',
-          }}
-        />
-        <span style={{ height: '40px', paddingRight: '10px', display: 'flex', alignItems: 'center' }}>
-          <SearchOutlined style={{ fontSize: '24px' }} />
-        </span>
-      </div>
-      <div className="export__file">
-        {/* <button onClick={exportToCSV}>Export to CSV</button> */}
-        <Button type="primary" shape="round" icon={<DownloadOutlined />} onClick={exportToCSV}>
-            Download
-          </Button>
-      </div>
-    </section>
-    <section className="table__body">
-      <table>
-        <thead>
-          <tr>
-            {headers.map((header) => (
-              <th key={header.key} onClick={() => sortTable(header.key)} className={header.key === 'actions' ? 'sticky-action' : ''}>
-                {header.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((row) => (
-            <tr key={row.id}>
-              {headers.map((header) => (
-                header.key !== "actions" ? (
-                  <td key={header.key}>
-                    {row[header.key]}
-                  </td>
-                ) : (
-                  <td key={header.key} className="sticky-action">
-                    <button className="action-btn edit-btn"><EyeOutlined /></button>
-                    <button className="action-btn view-btn"><EditOutlined /></button>
-                    <button className="action-btn delete-btn"><DeleteOutlined /></button>
-                  </td>
-                )
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      
-    </section>
-  </main>
+                    {/* Fourth row of fields */}
+                    <div className="input-group">
+                        <div className="input-wrapper">
+                            <label>Amount</label>
+                            <Input
+                                name="amount"
+                                value={selectedRow.amount}
+                                onChange={handleInputChange}
+                                placeholder="Amount"
+                            />
+                        </div>
+                        <div className="input-wrapper">
+                            <label>Area</label>
+                            <Input
+                                name="area"
+                                value={selectedRow.area}
+                                onChange={handleInputChange}
+                                placeholder="Area"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+        )}
+    </main>
 );
 }
 
