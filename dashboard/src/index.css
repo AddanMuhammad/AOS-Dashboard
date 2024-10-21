@@ -102,7 +102,7 @@
 
 .card-content {
   flex-grow: 1; 
-  overflow-y: auto; 
+  overflow: hidden; /* Changed from overflow-y: auto to overflow: hidden */
   max-height: 100%; 
 }
 
@@ -111,7 +111,6 @@
   color: #446;
   margin-top: auto; 
 }
-
 
 @media (max-width: 768px) {
   .card {
@@ -125,6 +124,10 @@
     width: 90vw;
     padding: 20px;
   }
+}
+
+.card-content::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }
 
 
@@ -308,7 +311,7 @@ main.table {
   background-color: #fff5;
 
   backdrop-filter: blur(7px);
-  box-shadow: 0 .4rem .8rem #0005;
+  /* box-shadow: 0 .4rem .8rem #0005; */
   border-radius: .8rem;
 
   overflow: hidden;
@@ -323,12 +326,13 @@ main.table {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-right: 10rem;
 }
 
 .table__header .input-group {
   width: 35%;
-  height: 100%;
-  background-color: #fff5;
+  height: 80%;
+  background-color: rgba(231, 231, 231, 0.333);
   padding: 0 .8rem;
   border-radius: 2rem;
 
@@ -379,7 +383,7 @@ main.table {
 .table__body::-webkit-scrollbar-thumb{
   border-radius: .5rem;
   background-color: #0004;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .table__body:hover::-webkit-scrollbar-thumb{ 
@@ -593,3 +597,61 @@ thead th.active,tbody td.active {
   width: 2rem;
   height: auto;
 }
+
+
+
+
+
+/* Sticky action column for both header and body */
+thead th.sticky-action {
+  position: sticky;
+  right: 0;
+  background-color: #d5d1defe; /* Header background color */
+  z-index: 3; /* Higher z-index for the header */
+  min-width: 3rem;
+}
+
+tbody td.sticky-action {
+  position: sticky;
+  right: 0;
+  background-color: #f7f7f7; /* Body background color */
+  z-index: 2; /* Lower z-index for the body */
+  min-width: 13rem;
+}
+
+/* Styling for action buttons */
+.action-column {
+  display: flex;
+  gap: 0.5rem; /* Space between buttons */
+}
+
+.action-btn {
+  padding: 0.4rem 0.6rem;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+}
+
+.edit-btn {
+  background-color: #4CAF50;
+  color: white;
+  margin: 3px; 
+}
+
+.view-btn {
+  background-color: #2196F3;
+  color: white;
+  margin: 3px; 
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
