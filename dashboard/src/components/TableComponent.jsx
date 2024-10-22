@@ -4,140 +4,25 @@ import { SearchOutlined, EditOutlined, DeleteOutlined, EyeOutlined, DownloadOutl
 import { Button, Modal, Input,  } from 'antd';
 import Pagination from './Pagination';
 import { toast } from 'react-toastify';
+import { newJSON } from '../json/Json';
 
-const initialData = [
-    {
-        id: 1,
-        customer: "Zinzu Chan Lee",
-        location: "Seoul",
-        date: "17 Dec, 2022",
-        status: "delivered",
-        amount: "$128.90",
-        february: "23",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-    },
-    {
-        id: 2,
-        customer: "Maria Gonzalez",
-        location: "Madrid",
-        date: "23 Jan, 2023",
-        status: "pending",
-        amount: "$99.50",
-        february: "23",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-    },
-    {
-        id: 3,
-        customer: "John Doe",
-        location: "New York",
-        date: "1 Feb, 2023",
-        status: "shipped",
-        amount: "$149.00",
-        february: "23",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-    },
-    {
-        id: 4,
-        customer: "Amina Al-Jabari",
-        location: "Dubai",
-        date: "10 Mar, 2023",
-        status: "cancelled",
-        amount: "$180.75",
-        february: "23",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-    },
-    {
-        id: 5,
-        customer: "Alexey Ivanov",
-        location: "Moscow",
-        date: "12 Apr, 2023",
-        status: "delivered",
-        amount: "$78.99",
-        february: "23",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-    },
-    {
-        id: 6,
-        customer: "Emma Smith",
-        location: "London",
-        date: "25 May, 2023",
-        status: "pending",
-        amount: "$255.50",
-        february: "23",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-    },
-    {
-        id: 7,
-        customer: "Sophia Zhang",
-        location: "Beijing",
-        date: "3 Jun, 2023",
-        status: "shipped",
-        amount: "$199.99",
-        february: "23",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-    },
-    {
-        id: 8,
-        customer: "Hans Müller",
-        location: "Berlin",
-        date: "15 Jul, 2023",
-        status: "delivered",
-        amount: "$89.50",
-        february: "25",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-      },
-      {
-        id: 9,
-        customer: "Zinzu Chan Lee",
-        location: "Seoul",
-        date: "17 Dec, 2022",
-        status: "delivered",
-        amount: "$128.90",
-       february: "23",
-       total: "77",
-       phone: "1234567890",
-       cnic: "0000000000000",
-       area: "N.A"
-      },
-      {
-        id: 10,
-        customer: "Maria Gonzalez",
-        location: "Madrid",
-        date: "23 Jan, 2023",
-        status: "pending",
-        amount: "$99.50",
-        february: "23",
-        total: "77",
-        phone: "1234567890",
-        cnic: "0000000000000",
-        area: "N.A"
-      },
-
-  ];
+const initialData = newJSON.features.map(feature => {
+  const { properties } = feature;
+  return {
+      division: properties.Division,
+      district: properties.District,
+      tehsil: properties.Tehsil,
+      location: properties.Grw__Name,
+      date: properties.Father_Nam,
+      phone: properties.Phone_no,
+      area: parseFloat(properties.Area),
+      ratoon: properties.Ratoon,
+      february: properties.February,
+      total: properties.Total,
+      comments: properties.Comments,
+      // Add more fields if required
+  };
+});
 
 
 
