@@ -1,9 +1,7 @@
 import React from 'react';
 import Card from './components/Card';
-import DropDownButton from './components/DropDownButton';
-import SearchBar from './components/SearchBar';
 import TableComponent from './components/TableComponent';
-import Pagination from './components/Pagination';
+
 
 
 const Details = () => {
