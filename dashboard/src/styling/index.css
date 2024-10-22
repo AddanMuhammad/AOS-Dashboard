@@ -306,7 +306,7 @@ body {
 
 /* Basic Styles */
 main.table {
-  width: 82vw;
+  width: calc(100% - 30px);
   height: 90vh;
   background-color: #fff5;
 
@@ -608,7 +608,7 @@ thead th.sticky-action {
   right: 0;
   background-color: #d5d1defe; /* Header background color */
   z-index: 3; /* Higher z-index for the header */
-  min-width: 3rem;
+  min-width: 1rem;
 }
 
 tbody td.sticky-action {
@@ -616,7 +616,7 @@ tbody td.sticky-action {
   right: 0;
   background-color: #f7f7f7; /* Body background color */
   z-index: 2; /* Lower z-index for the body */
-  min-width: 13rem;
+  min-width: 1rem;
 }
 
 /* Styling for action buttons */

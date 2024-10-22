@@ -24,7 +24,6 @@ const Details = () => {
         </div>
       </div> */}
       <TableComponent/>
-      
     </Card>
   );
 };

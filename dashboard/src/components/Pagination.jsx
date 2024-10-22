@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
 
-function Pagination() {
-   
-
-  
+// eslint-disable-next-line react/prop-types
+function Pagination({array}) {
+  // eslint-disable-next-line react/prop-types
+  const len = array.length;
+  console.log(len);
   return (
     <div>
         <nav>
