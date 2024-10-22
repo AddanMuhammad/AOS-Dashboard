@@ -664,6 +664,8 @@ tbody td.sticky-action {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
+    align-items: center;
 }
 
 .input-group {
