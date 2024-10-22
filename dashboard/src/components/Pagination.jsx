@@ -1,34 +1,36 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react'
-// eslint-disable-next-line no-unused-vars
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-// eslint-disable-next-line react/prop-types
-function Pagination({array}) {
-  // eslint-disable-next-line react/prop-types
-  const len = array.length;
-  console.log(len);
+function Pagination({ array, itemsPerPage, onPageChange }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(array.length / itemsPerPage);
+
+  const handleClick = (newPage) => {
+    if (newPage < 1 || newPage > totalPages) return;
+    setCurrentPage(newPage);
+    const startIndex = (newPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    onPageChange(startIndex, endIndex);
+  };
+
   return (
-    <div>
-        <nav>
-            <ul className='pagination'>
-                <li className='page-item'>
-                    <a href="#" className='page-link' >Prev</a>
-                </li>
-                {/* {
-                  numbers.map((n,i) => (
-                    <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>
-                      <a href="#" className='page-link' onClick={()=> changeCPage(n)}>{n}</a>
-                    </li>
-                  ))
-                } */}
-                <li className='page-item'>
-                  <a href="#" className='page-link' >Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-  )
+    <nav style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+      <button
+        className="page-link"
+        onClick={() => handleClick(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        Prev
+      </button>
+      <span style={{ margin: '0 10px' }}>{`Page ${currentPage} of ${totalPages}`}</span>
+      <button
+        className="page-link"
+        onClick={() => handleClick(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        Next
+      </button>
+    </nav>
+  );
 }
 
-export default Pagination
+export default Pagination;

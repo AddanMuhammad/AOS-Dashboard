@@ -307,7 +307,7 @@ body {
 /* Basic Styles */
 main.table {
   width: calc(100% - 30px);
-  height: 90vh;
+  height: 100%;
   background-color: #fff5;
 
   backdrop-filter: blur(7px);
