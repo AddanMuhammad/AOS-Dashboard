@@ -6,7 +6,7 @@ import TableComponent from './components/TableComponent';
 
 const Details = () => {
   return (
-    <Card>
+    <Card height="auto">
       {/* <div className="header">
         <div>
           <h1 className="title">Farmer Info</h1>

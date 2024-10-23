@@ -8,6 +8,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import Home from './Home';
 import Create from './Create';
 import Details from './Details';
+import MapComponent from './components/MapComponent';
 
 const { Header, Sider, Content } = Layout;
 
@@ -82,6 +83,7 @@ function App() {
               <Route path='/home' element={<Home />} />
               <Route path='/create' element={<Create />} />
               <Route path='/details' element={<Details />} />
+              <Route path='/map' element={<MapComponent/>} />
             </Routes>
           </Content>
         </Layout>

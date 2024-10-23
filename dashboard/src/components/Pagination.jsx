@@ -9,7 +9,7 @@ function Pagination({ array, itemsPerPage, onPageChange }) {
     setCurrentPage(newPage);
     const startIndex = (newPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    onPageChange(startIndex, endIndex);
+    onPageChange(startIndex, endIndex, newPage);
   };
 
   return (
