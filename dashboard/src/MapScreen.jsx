@@ -2,13 +2,12 @@ import React from 'react'
 import Card from './components/Card'
 import MapComponent from './components/MapComponent'
 
-function Create() {
+function MapScreen() {
   return (
     <Card>
-      <MapComponent/>
+        <MapComponent/>
     </Card>
-    
   )
 }
 
-export default Create
+export default MapScreen
