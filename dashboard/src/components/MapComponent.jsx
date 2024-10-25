@@ -31,6 +31,10 @@
 //       [23.6345, 60.8724],
 //       [37.0841, 77.8375],
 //     ];
+
+//     // const bounds = [
+//     //   [29.3950, 71.6830]
+//     // ];
 //     mapRefInstance.current.fitBounds(bounds);
 
 //     const interactiveLayer = L.geoJSON(newJSON, {
@@ -126,12 +130,12 @@
 //             <span style={{ fontWeight: "bold", fontSize: "20px" }}><DownOutlined /></span>
 //           </button>
 //           <div style={dataCardContainer}>
-//             <DataCard title="Total Area" value="3792 acres" />
-//             <DataCard title="Field Area" value="2.1 acres" />
-//             <DataCard title="Orchards" value="15.3 acres" />
-//             <DataCard title="Constructed Area" value="0 acres" />
-//             <DataCard title="Non-Constructed Area" value="177.4 acres" />
-//             <DataCard title="Yield Area" value="177.4 acres" />
+//             <DataCard title="Total Area:" value="3792 acres" />
+//             <DataCard title="Field Area:" value="2.1 acres" />
+//             <DataCard title="Orchards:" value="15.3 acres" />
+//             <DataCard title="Constructed Area:" value="0 acres" />
+//             <DataCard title="Non-Constructed Area:" value="177.4 acres" />
+//             <DataCard title="Yield Area:" value="177.4 acres" />
 //           </div>
 //         </div>
 //       </div>
@@ -218,7 +222,7 @@
 //   bottom: 0,
 //   left: 0,
 //   right: 0,
-//   height: "37%",
+//   height: "33%",
 //   backgroundColor: "#F2F3F2",
 //   boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
 //   borderTopLeftRadius: "15px",
@@ -231,7 +235,7 @@
 //   padding: "20px",
 //   display: "flex",
 //   flexDirection: "column",
-//   gap: "15px",
+//   gap: "5px",
 //   overflowY: "auto",
 // };
 
@@ -256,26 +260,35 @@
 //   display: "flex",
 //   flexWrap: "wrap",
 //   gap: "10px",
+//   justifyContent: "space-between"
+
 // };
 
 // const dataCardStyle = {
-//   flex: "1 1 calc(30% - 10px)",
+//   // flex: "1 1 calc(25% - 10px)",
+//   width: "30%", // Adjusted to decrease width
 //   padding: "15px",
 //   borderRadius: "8px",
 //   backgroundColor: "#fff",
 //   boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
 //   textAlign: "center",
+
+//   overflow: "hidden", // Ensure text does not overflow
 // };
 
 // const dataTitleStyle = {
 //   fontSize: "16px",
-//   color: "#555",
+//   background: "linear-gradient(90deg, #FF5733, #FFC300)", // Gradient background
+//   WebkitBackgroundClip: "text",
+//   color: "transparent", // Make text transparent to show gradient
 //   margin: "0 0 8px",
 // };
 
 // const dataValueStyle = {
 //   fontSize: "15px",
-//   color: "#777",
+//   background: "linear-gradient(90deg, #33FF57, #33C3FF)", // Different gradient for values
+//   WebkitBackgroundClip: "text",
+//   color: "transparent", // Make text transparent to show gradient
 //   margin: 0,
 // };
 
@@ -320,13 +333,15 @@ const MapComponent = () => {
     ).addTo(mapRefInstance.current);
 
     // const bounds = [
-    //   [23.6345, 60.8724],
-    //   [37.0841, 77.8375],
+    //   [29.3600, 71.6830], // Bahawalpur
+    // [31.5204, 74.1502]  // Faisalabad
     // ];
 
     const bounds = [
-      [29.3950, 71.6830]
+      [29.3000, 71.6000], // Southwest corner (area around Bahawalpur)
+    [29.4500, 71.8000]
     ];
+
     mapRefInstance.current.fitBounds(bounds);
 
     const interactiveLayer = L.geoJSON(newJSON, {
@@ -342,7 +357,9 @@ const MapComponent = () => {
             weight: 3,
           });
 
-          mapRefInstance.current.fitBounds(layer.getBounds());
+          mapRefInstance.current.flyToBounds(layer.getBounds(), {
+            duration: 1.5, // Duration of zoom effect in seconds
+          });
         });
       },
     }).addTo(mapRefInstance.current);
@@ -367,7 +384,9 @@ const MapComponent = () => {
 
     if (filteredFeatures.length > 0) {
       const bounds = L.geoJSON(filteredFeatures).getBounds();
-      mapRefInstance.current.fitBounds(bounds);
+      mapRefInstance.current.flyToBounds(bounds, {
+        duration: 1.5, // Duration of zoom effect in seconds
+      });
       setIsPanelVisible(true); // Open the sliding panel when features are found
     } else {
       alert("No features found for the selected criteria.");
@@ -409,15 +428,12 @@ const MapComponent = () => {
         <button onClick={handleFilter} style={buttonStyle}>Filter</button>
       </div>
 
-      {/* Circular button to open sliding panel */}
       <button onClick={togglePanel} style={roundButtonStyle}>
         <span style={{ fontWeight: "bold", fontSize: "20px" }}><UpOutlined /></span>
       </button>
 
-      {/* Sliding panel */}
       <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)" }}>
         <div style={panelContentStyle}>
-          {/* Close button at the top center */}
           <button onClick={togglePanel} style={closeButtonStyle}>
             <span style={{ fontWeight: "bold", fontSize: "20px" }}><DownOutlined /></span>
           </button>
@@ -434,10 +450,6 @@ const MapComponent = () => {
     </>
   );
 };
-
-
-
-
 
 const DataCard = ({ title, value }) => (
   <div style={dataCardStyle}>
@@ -533,19 +545,19 @@ const panelContentStyle = {
 
 const closeButtonStyle = {
   fontSize: "24px",
-  background: "white", // Set the background to white
-  border: "1px solid rgba(0, 0, 0, 0.3)", // Optional: Add a light border for better visibility
-  borderRadius: "50%", // Ensure it is circular
+  background: "white", 
+  border: "1px solid rgba(0, 0, 0, 0.3)", 
+  borderRadius: "50%", 
   color: "#888",
   cursor: "pointer",
-  alignSelf: "center", // Center the close button horizontally
-  width: "35px", // Set a fixed width
-  height: "35px", // Set the height equal to the width for a circular shape
-  padding: "0", // Remove padding to keep the button circular
-  display: "flex", // Use flexbox for centering the icon
-  alignItems: "center", // Center the icon vertically
-  justifyContent: "center", // Center the icon horizontally
-  boxShadow: "0 2px 5px rgba(0,0,0,0.2)", // Optional: Add a subtle shadow
+  alignSelf: "center",
+  width: "35px", 
+  height: "35px", 
+  padding: "0", 
+  display: "flex",
+  alignItems: "center", 
+  justifyContent: "center", 
+  boxShadow: "0 2px 5px rgba(0,0,0,0.2)", 
 };
 
 const dataCardContainer = {
@@ -558,29 +570,29 @@ const dataCardContainer = {
 
 const dataCardStyle = {
   // flex: "1 1 calc(25% - 10px)",
-  width: "30%", // Adjusted to decrease width
+  width: "30%", 
   padding: "15px",
   borderRadius: "8px",
   backgroundColor: "#fff",
   boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
   textAlign: "center",
 
-  overflow: "hidden", // Ensure text does not overflow
+  overflow: "hidden", 
 };
 
 const dataTitleStyle = {
   fontSize: "16px",
-  background: "linear-gradient(90deg, #FF5733, #FFC300)", // Gradient background
+  background: "linear-gradient(90deg, #FF5733, #FFC300)", 
   WebkitBackgroundClip: "text",
-  color: "transparent", // Make text transparent to show gradient
+  color: "transparent", 
   margin: "0 0 8px",
 };
 
 const dataValueStyle = {
   fontSize: "15px",
-  background: "linear-gradient(90deg, #33FF57, #33C3FF)", // Different gradient for values
+  background: "linear-gradient(90deg, #33FF57, #33C3FF)", 
   WebkitBackgroundClip: "text",
-  color: "transparent", // Make text transparent to show gradient
+  color: "transparent", 
   margin: 0,
 };
 
