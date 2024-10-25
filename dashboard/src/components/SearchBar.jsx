@@ -15,16 +15,16 @@ const suffix = (
 function SearchBar({ search, setSearch }) {
   return (
     <Space direction="vertical">
-    <Search
-      placeholder="input search text"
-      onChange={(e) => setSearch(e.target.value)}
-      value={search}
-      style={{
-        width: 200,
-      }}
-    />
-    
-  </Space>
+      <Search
+        placeholder="input search text"
+        onChange={(e) => setSearch(e.target.value)}
+        value={search}
+        style={{
+          width: 200,
+        }}
+      />
+
+    </Space>
   )
 }
 

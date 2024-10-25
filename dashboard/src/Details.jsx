@@ -7,7 +7,7 @@ import TableComponent from './components/TableComponent';
 const Details = () => {
   return (
     <Card height="auto">
-      <TableComponent/>
+      <TableComponent />
     </Card>
   );
 };

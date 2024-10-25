@@ -6,9 +6,9 @@ import DetailForm from './components/DetailForm'
 function Create() {
   return (
     <Card height='auto'>
-      <DetailForm/>
+      <DetailForm />
     </Card>
-    
+
   )
 }
 

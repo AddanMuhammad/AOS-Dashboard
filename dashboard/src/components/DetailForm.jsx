@@ -56,11 +56,11 @@ function DetailForm() {
   };
 
   const fields = [
-    { label: 'Serial No', name: 'serialNo'  },
+    { label: 'Serial No', name: 'serialNo' },
     { label: 'Grw. Code', name: 'grwCode' },
-    { label: 'Grw. Name', name: 'grwName'  },
-    { label: 'Father Name', name: 'fatherName'  },
-    { label: 'September', name: 'september'},
+    { label: 'Grw. Name', name: 'grwName' },
+    { label: 'Father Name', name: 'fatherName' },
+    { label: 'September', name: 'september' },
     { label: 'Ratoon', name: 'ratoon' },
     { label: 'February', name: 'february' },
     { label: 'Total', name: 'total' },

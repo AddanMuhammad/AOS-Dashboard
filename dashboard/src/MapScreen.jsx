@@ -5,7 +5,7 @@ import MapComponent from './components/MapComponent'
 function MapScreen() {
   return (
     <Card>
-        <MapComponent/>
+      <MapComponent />
     </Card>
   )
 }

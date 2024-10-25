@@ -11,7 +11,7 @@ const HomeCard = ({ cardsData, cardHeight, cardWidth }) => {
             className="ag-courses_item"
             style={{
               height: cardHeight,
-              width: cardWidth, 
+              width: cardWidth,
             }}
           >
             <div className="ag-courses-item_link">

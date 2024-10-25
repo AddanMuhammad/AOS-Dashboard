@@ -79,11 +79,11 @@ function App() {
             }}
           >
             <Routes>
-            <Route path='/' element={<Navigate to='/home' />} />
+              <Route path='/' element={<Navigate to='/home' />} />
               <Route path='/home' element={<Home />} />
               <Route path='/create' element={<Create />} />
               <Route path='/details' element={<Details />} />
-              <Route path='/map' element={<MapScreen/>} />
+              <Route path='/map' element={<MapScreen />} />
             </Routes>
           </Content>
         </Layout>
