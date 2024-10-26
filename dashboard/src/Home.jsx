@@ -20,7 +20,7 @@ function Home() {
       title: 'Fullstack Development',
       startDate: '29.10.2024',
 
-      bgColor: '#32CD32',
+      bgColor: '#FFBF00',
     },
   ];
   return (

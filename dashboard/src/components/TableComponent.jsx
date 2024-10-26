@@ -229,7 +229,11 @@ function TableComponent() {
             </span>
           </div>
           <div className="export__file">
-            <Button type="primary" shape="round" icon={<DownloadOutlined />} onClick={exportToCSV}>
+            <Button style={{
+              background: 'linear-gradient(135deg, #a8e063, #56ab2f)',
+
+              color: 'white',
+            }} type="primary" shape="round" icon={<DownloadOutlined />} onClick={exportToCSV}>
               Download
             </Button>
           </div>
@@ -262,7 +266,7 @@ function TableComponent() {
                       <td key={header.key}>{row[header.key]}</td>
                     ) : (
                       <td key={header.key} className="sticky-action">
-                        <button className="action-btn view-btn"><EyeOutlined /></button>
+                        {/* <button className="action-btn view-btn"><EyeOutlined /></button> */}
                         <button className="action-btn edit-btn" onClick={() => showModal(row)}><EditOutlined /></button>
                         <button className="action-btn delete-btn" onClick={() => showDeleteModal(row.id)}><DeleteOutlined /></button>
                       </td>

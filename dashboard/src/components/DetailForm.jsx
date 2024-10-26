@@ -139,14 +139,15 @@ const styles = {
   },
   button: {
     marginTop: '30px',
-    backgroundColor: '#0055FF',
+    background: 'linear-gradient(135deg, #a8e063, #56ab2f)', // Light green gradient
     color: '#fff',
     border: 'none',
     borderRadius: '4px',
     padding: '10px 20px',
     fontSize: '16px',
     cursor: 'pointer',
-    width: '20%'
+    width: '20%',
+    transition: 'background 0.3s',
   },
   error: {
     color: 'red',
@@ -157,5 +158,4 @@ const styles = {
     color: '#999',
   },
 };
-
 export default DetailForm
