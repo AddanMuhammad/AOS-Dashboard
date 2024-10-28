@@ -286,7 +286,10 @@ function TableComponent() {
             open={isModalOpen}
             onOk={handleOk}
             onCancel={handleCancel}
+             okText="OK"
+          cancelText="Cancel"
             centered
+            okButtonProps={{ style: { backgroundColor: 'green', borderColor: 'green' } }}
           >
             <div className="modal-content">
               {/* First row of fields */}

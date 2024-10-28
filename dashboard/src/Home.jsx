@@ -11,13 +11,13 @@ function Home() {
       bgColor: '#FF6347',
     },
     {
-      title: 'Backend Development',
+      title: 'Total Area',
       startDate: '22.10.2024',
 
       bgColor: '#4682B4',
     },
     {
-      title: 'Fullstack Development',
+      title: 'Constructed Area',
       startDate: '29.10.2024',
 
       bgColor: '#FFBF00',
