@@ -8,6 +8,11 @@ import Home from './Home';
 import Create from './Create';
 import Details from './Details';
 import MapScreen from './MapScreen';
+import FieldsMap from './FieldsMap';
+import CropYieldMap from './CropYieldMap';
+import LSTMap from './LSTMap';
+import SoilMap from './SoilMap';
+import SolarLocation from './SolarLocation';
 
 const { Header, Sider, Content } = Layout;
 
@@ -53,7 +58,7 @@ function App() {
                   fontWeight: 'bold',
                 }}
               >
-                Hello Farmer👋,
+                Zar’aat Dost Dashboard,
               </span>
             </div>
           </Header>
@@ -68,6 +73,11 @@ function App() {
               <Route path="/create" element={<Create />} />
               <Route path="/details" element={<Details />} />
               <Route path="/map" element={<MapScreen />} />
+              <Route path="/map/fields-map" element={<FieldsMap/>} />
+              <Route path="/map/crop-yield-map" element={<CropYieldMap/>} />
+              <Route path="/map/lst-map" element={<LSTMap/>} />
+              <Route path="/map/soil-map" element={<SoilMap/>} />
+              <Route path="/map/solar-location" element={<SolarLocation/>} />
             </Routes>
           </Content>
         </Layout>

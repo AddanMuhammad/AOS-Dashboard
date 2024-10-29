@@ -1,5 +1,5 @@
 // import React, { useEffect, useRef, useState } from "react";
-// import { UpOutlined, DownOutlined } from '@ant-design/icons';
+// import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 // import L from "leaflet";
 // import "leaflet/dist/leaflet.css";
 // import { newJSON } from '../json/Json';
@@ -14,6 +14,7 @@
 //   const [selectedMouza, setSelectedMouza] = useState('');
 //   const [selectedGrwName, setSelectedGrwName] = useState('');
 //   const [isPanelVisible, setIsPanelVisible] = useState(false);
+//   const [isRightPanelVisible, setIsRightPanelVisible] = useState(false);
 //   const [panelData, setPanelData] = useState({
 //     title: "Default Data",
 //     data: [
@@ -25,6 +26,10 @@
 //       { title: "Yield Area:", value: "177.4 acres" },
 //     ],
 //   });
+
+//   const toggleRightPanel = () => {
+//     setIsRightPanelVisible(prev => !prev);
+//   };
 
 //   // Extract unique values for dropdowns
 //   const divisions = [...new Set(newJSON.features.map(feature => feature.properties.Division))];
@@ -193,6 +198,15 @@
 //         <span style={{ fontWeight: "bold", fontSize: "20px" }}><UpOutlined /></span>
 //       </button>
 
+
+
+//       <div style={{ ...rightPanelStyle, transform: isRightPanelVisible ? "translateX(0)" : "translateX(100%)" }}>
+//         <button onClick={toggleRightPanel} style={closeRightPanelButtonStyle}>
+//         {isRightPanelVisible ? <RightOutlined /> : <LeftOutlined />}
+//         </button>
+
+//       </div>
+
 //       <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)" }}>
 //         <div style={panelContentStyle}>
 //           <button onClick={togglePanel} style={closeButtonStyle}>
@@ -279,6 +293,29 @@
 //   justifyContent: "center",
 // };
 
+// const rightToggleButtonStyle = {
+//   position: "absolute",
+//   top: "50%",
+//   right: "20px",
+//   transform: "translateY(-50%)",
+//   width: "40px",
+//   height: "40px",
+//   backgroundColor: "rgba(255, 255, 255, 0.8)",
+//   borderRadius: "50%",
+//   border: "1px solid rgba(0, 0, 0, 0.3)",
+
+//   fontSize: "18px",
+//   fontWeight: "bold",
+//   cursor: "pointer",
+//   boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+
+//   zIndex: 1000,
+
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "center",
+// };
+
 // const panelStyle = {
 //   position: "fixed",
 //   bottom: 0,
@@ -303,7 +340,7 @@
 
 // const closeButtonStyle = {
 //   fontSize: "20px",
-//   background: "#83f28f",
+//   background: "white",
 //   border: "1px solid rgba(0, 0, 0, 0.3)",
 //   borderRadius: "50%",
 //   color: "#888",
@@ -356,17 +393,56 @@
 //   margin: 0,
 // };
 
+
+
+
+// const rightPanelStyle = {
+//   position: "absolute",
+//   top: "30%",
+//   right: "0",
+//   height: "50%",
+//   borderRadius: "10px",
+//   width: "50px", // Width of the sliding panel
+//   backgroundColor: "white",
+//   boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+//   transition: "transform 0.3s ease",
+//   zIndex: 1000,
+// };
+
+
+// const closeRightPanelButtonStyle = {
+//   position: 'absolute',
+//   left: '-50px',
+//   top: '50%',
+//   transform: 'translateY(-50%)',
+//   backgroundColor: '#f4fdf4',
+//   borderRadius: '50%',
+//   width: '40px',
+//   height: '40px',
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+//   boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)',
+//   cursor: 'pointer'
+// };
+
+
+
+
+
 // export default MapComponent;
 
 
 
 
 
+
 import React, { useEffect, useRef, useState } from "react";
-import { UpOutlined, DownOutlined, LeftOutlined } from '@ant-design/icons';
+import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined } from '@ant-design/icons';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { newJSON } from '../json/Json';
+import { Link, useLocation } from 'react-router-dom';
 
 const MapComponent = () => {
   const mapRef = useRef(null);
@@ -390,6 +466,9 @@ const MapComponent = () => {
       { title: "Yield Area:", value: "177.4 acres" },
     ],
   });
+
+  const location = useLocation();
+  const selectedKey = location.pathname === '/map/fields-map' ? '1' : location.pathname === '/map/crop-yield-map' ? '2' : location.pathname === '/map/lst-map' ? '3' : location.pathname === '/map/soil-map' ? '4' : '5';
 
   const toggleRightPanel = () => {
     setIsRightPanelVisible(prev => !prev);
@@ -562,14 +641,37 @@ const MapComponent = () => {
         <span style={{ fontWeight: "bold", fontSize: "20px" }}><UpOutlined /></span>
       </button>
 
-      <button onClick={toggleRightPanel} style={rightToggleButtonStyle}>
-        <span style={{ fontWeight: "bold", fontSize: "16px" }}><LeftOutlined /></span>
-      </button>
+
 
       <div style={{ ...rightPanelStyle, transform: isRightPanelVisible ? "translateX(0)" : "translateX(100%)" }}>
-        <h3>Right Panel</h3>
-        <p>This is the content of the right panel.</p>
-        {/* Additional content can be added here */}
+        <button onClick={toggleRightPanel} style={closeRightPanelButtonStyle}>
+          {isRightPanelVisible ? <RightOutlined /> : <LeftOutlined />}
+        </button>
+
+        <div selectedKeys={[selectedKey]}>
+          <button key='1' className="action-btn edit-btn" title="Fields Map">
+
+            <Link to="/map/fields-map"><DeploymentUnitOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='2' className="action-btn edit-btn"  title="Crop Yield Map">
+            
+            <Link to="/map/crop-yield-map"><FunnelPlotOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='3' className="action-btn edit-btn"  title="LST Map">
+            
+            <Link to="/map/lst-map"><OneToOneOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='4' className="action-btn edit-btn"  title="Soil Map">
+            
+            <Link to="/map/soil-map"><PartitionOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='5' className="action-btn edit-btn"  title="Solar Location">
+            
+            <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+        </div>
+
+
       </div>
 
       <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)" }}>
@@ -673,7 +775,7 @@ const rightToggleButtonStyle = {
   fontWeight: "bold",
   cursor: "pointer",
   boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
-  
+
   zIndex: 1000,
 
   display: "flex",
@@ -751,7 +853,7 @@ const dataTitleStyle = {
 
 const dataValueStyle = {
   fontSize: "13px",
-  background: "red",
+  background: "black",
   WebkitBackgroundClip: "text",
   color: "transparent",
   fontWeight: "bold",
@@ -763,15 +865,36 @@ const dataValueStyle = {
 
 const rightPanelStyle = {
   position: "absolute",
-  top: "0",
+  top: "35%",
   right: "0",
-  height: "100%",
-  width: "300px", // Width of the sliding panel
+  height: "27%",
+  borderRadius: "10px",
+  width: "50px", // Width of the sliding panel
   backgroundColor: "white",
   boxShadow: "0 0 10px rgba(0,0,0,0.5)",
   transition: "transform 0.3s ease",
   zIndex: 1000,
+  textAlign: "center",
+  padding: "10px 0px 0px 0px"
 };
+
+
+const closeRightPanelButtonStyle = {
+  position: 'absolute',
+  left: '-50px',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  backgroundColor: '#f4fdf4',
+  borderRadius: '50%',
+  width: '40px',
+  height: '40px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)',
+  cursor: 'pointer'
+};
+
 
 
 

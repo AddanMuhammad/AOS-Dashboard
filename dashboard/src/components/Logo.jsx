@@ -7,7 +7,7 @@ const Logo = ({ collapsed }) => {
       <div className="logo-icon">
         <FireFilled />
       </div>
-      {!collapsed && <span className="logo-text">Zar’at Dost</span>}
+      {!collapsed && <span className="logo-text">Zar’aat Dost</span>}
     </div>
   );
 };
