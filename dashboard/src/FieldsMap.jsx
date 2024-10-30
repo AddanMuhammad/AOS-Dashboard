@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import Card from './components/Card';
 import FieldMapImg from './assets/fieldMap.jpg';
 import FieldMapDetail from './assets/fieldMapDetail.jpeg';
-import { UpOutlined, DownOutlined } from '@ant-design/icons';
+import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { Link, useLocation } from 'react-router-dom';
 
 function FieldsMap() {
-  const [isPanelVisible, setIsPanelVisible] = useState(false);
+  const location = useLocation();
+  const selectedKey = location.pathname === '/map/fields-map' ? '1' : location.pathname === '/map/crop-yield-map' ? '2' : location.pathname === '/map/lst-map' ? '3' : location.pathname === '/map/soil-map' ? '4' : '5';
+
+  const [isRightPanelVisible, setIsRightPanelVisible] = useState(false);
+  const [isPanelVisible, setIsPanelVisible] = useState(true); // Set initial state to true for the panel to be open by default
   const [panelData, setPanelData] = useState({
     title: "Default Data",
     data: [
@@ -22,8 +27,12 @@ function FieldsMap() {
     setIsPanelVisible(prev => !prev);
   };
 
+  const toggleRightPanel = () => {
+    setIsRightPanelVisible(prev => !prev);
+  };
+
   return (
-    <Card>
+    <Card height="fit-content">
       <h2>Fields Map</h2>
       <img style={{ width: '100%', height: '100%' }} src={FieldMapImg} alt="fieldMap" />
       
@@ -48,10 +57,36 @@ function FieldsMap() {
           </div>
         </div>
       </div>
+
+      <div style={{ ...rightPanelStyle, transform: isRightPanelVisible ? "translateX(0)" : "translateX(100%)" }}>
+        <button onClick={toggleRightPanel} style={closeRightPanelButtonStyle}>
+          {isRightPanelVisible ? <RightOutlined /> : <LeftOutlined />}
+        </button>
+
+        <div selectedKeys={[selectedKey]}>
+          <button key='1' className="action-btn edit-btn" title="Fields Map">
+            <Link to="/map/fields-map"><DeploymentUnitOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='2' className="action-btn edit-btn" title="Crop Yield Map">
+            <Link to="/map/crop-yield-map"><FunnelPlotOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='3' className="action-btn edit-btn" title="LST Map">
+            <Link to="/map/lst-map"><OneToOneOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='4' className="action-btn edit-btn" title="Soil Map">
+            <Link to="/map/soil-map"><PartitionOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='5' className="action-btn edit-btn" title="Solar Location">
+            <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='6' className="action-btn edit-btn" title="Mauza Boundary">
+            <Link to="/map"><AppstoreOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+        </div>
+      </div>
     </Card>
   );
 }
-
 const DataCard = ({ title, value }) => (
   <div style={dataCardStyle}>
     <h4 style={dataTitleStyle}>{title}</h4>
@@ -166,5 +201,37 @@ const roundButtonStyle = {
   alignItems: "center",
   justifyContent: "center",
 };
+
+const rightPanelStyle = {
+  position: "absolute",
+  top: "35%",
+  right: "0",
+  height: "31%",
+  borderRadius: "10px",
+  width: "50px", // Width of the sliding panel
+  backgroundColor: "white",
+  boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+  transition: "transform 0.3s ease",
+  zIndex: 1000,
+  textAlign: "center",
+  padding: "10px 0px 0px 0px"
+};
+
+const closeRightPanelButtonStyle = {
+  position: 'absolute',
+  left: '-50px',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  backgroundColor: '#f4fdf4',
+  borderRadius: '50%',
+  width: '40px',
+  height: '40px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.3)',
+  cursor: 'pointer'
+};
+
 
 export default FieldsMap;

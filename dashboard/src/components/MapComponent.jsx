@@ -438,7 +438,7 @@
 
 
 import React, { useEffect, useRef, useState } from "react";
-import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined } from '@ant-design/icons';
+import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined } from '@ant-design/icons';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { newJSON } from '../json/Json';
@@ -669,6 +669,9 @@ const MapComponent = () => {
             
             <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
+          <button key='6' className="action-btn edit-btn"  title="Mauza Boundary">
+            <Link to="/map"><AppstoreOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
         </div>
 
 
@@ -867,7 +870,7 @@ const rightPanelStyle = {
   position: "absolute",
   top: "35%",
   right: "0",
-  height: "27%",
+  height: "32%",
   borderRadius: "10px",
   width: "50px", // Width of the sliding panel
   backgroundColor: "white",
