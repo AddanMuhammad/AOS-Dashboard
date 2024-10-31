@@ -5,22 +5,25 @@ import HomeCard from './components/HomeCard'
 function Home() {
   const cardsData = [
     {
-      title: 'Total Farmer\'s',
-      startDate: '15.10.2024',
+      title: 'Total Farmers',
+      startDate: '12345',
 
-      bgColor: '#FF6347',
+    
+      bgColor: '#6B8E23', // Olive green      
     },
     {
       title: 'Total Area',
-      startDate: '22.10.2024',
+      startDate: '12345',
 
-      bgColor: '#4682B4',
+      bgColor: '#6B8E23', // Olive green      
+     
     },
     {
       title: 'Constructed Area',
-      startDate: '29.10.2024',
+      startDate: '12345',
 
-      bgColor: '#FFBF00',
+      
+      bgColor: '#6B8E23', // Olive green      
     },
   ];
   return (

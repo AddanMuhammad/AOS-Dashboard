@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from './components/Card';
 import GrwYieldArea from './assets/grwYieldArea.jpg';
-import GrwYieldAreaDetail from './assets/grwYieldAreaDetail.jpeg';
+import GrwYieldAreaDetail from './assets/grwCropYieldDetail.jpeg';
 import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -14,11 +14,11 @@ function CropYieldMap() {
   const [panelData, setPanelData] = useState({
     title: "Default Data",
     data: [
-      { title: "Total:", value: "195 acres" },
-      { title: "Roads:", value: "3 acres" },
-      { title: "Built-up:", value: "1 acres" },
-      { title: "Other Features:", value: "0 acres" },
       { title: "Yield Area:", value: "191 acres" },
+      { title: "Sugarcane:", value: "178 acres" },
+      { title: "Other crops:", value: "0 acres" },
+      { title: "Not detected:", value: "13 acres" },
+      // { title: "Yield Area:", value: "191 acres" },
       // { title: "Non-Constructed Area:", value: "26 acres" },
     ],
   });

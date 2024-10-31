@@ -9,6 +9,7 @@
   list-style: none;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  background-color: '#FCEEE3';
 }
 
 
@@ -41,7 +42,7 @@
   font-size: 1.5rem;
   background: #fff;
   border-radius: 50%;
-  color: #86e49d;
+  color: #355e3b ;
 }
 
 .logo-text {
@@ -63,7 +64,8 @@
 }
 
 .sidebar {
-  background: linear-gradient(135deg, #a8e063, #56ab2f);
+  /* background: linear-gradient(135deg, #a8e063, #56ab2f); */
+  background: linear-gradient(135deg, #355e3b, #1b3d2f);
   /* Light gradient green */
 }
 
@@ -82,6 +84,7 @@
 
 .sidebar .ant-menu-item-selected {
   background-color: rgba(255, 255, 255, 0.2);
+  /* background-color: rgba(240, 235, 220, 0.7); */
   /* Highlight selected item with subtle transparency */
 }
 
@@ -198,7 +201,7 @@ body {
   height: 100%;
   width: 100%;
   padding: 30px 20px;
-  background-color: #3BD16F;
+  background-color: #034b1b;
   position: relative;
 }
 
@@ -238,7 +241,7 @@ body {
 .ag-courses-item_bg {
   height: 150px;
   width: 150px;
-  background-color: #f9b234;
+  background-color: #cfc6a8;
   position: absolute;
   top: -75px;
   right: -75px;
@@ -295,6 +298,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+
 }
 
 .title {
@@ -460,7 +464,7 @@ thead th {
   position: sticky;
   top: 0;
   left: 0;
-  background-color: #1fd655;
+  background-color: #005500;
   color: white;
   cursor: pointer;
   text-transform: capitalize;
@@ -529,7 +533,7 @@ tbody tr.hide td img {
 }
 
 
-@media (max-width: 1000px) {
+@media (max-width: 1000px) {Map
   td:not(:first-of-type) {
     min-width: 12.1rem;
   }
@@ -655,7 +659,7 @@ tbody td.active {
 thead th.sticky-action {
   position: sticky;
   right: 0;
-  background-color: #1fd655;
+  background-color: #005500;
   color: white;
   /* Header background color */
   z-index: 3;
@@ -757,3 +761,6 @@ tbody td.sticky-action {
   font-size: 12px;
   margin-top: 4px;
 }
+
+
+

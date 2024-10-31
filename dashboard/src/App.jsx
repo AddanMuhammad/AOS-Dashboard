@@ -13,6 +13,7 @@ import CropYieldMap from './CropYieldMap';
 import LSTMap from './LSTMap';
 import SoilMap from './SoilMap';
 import SolarLocation from './SolarLocation';
+import MauzaCropYield from './MauzaCropYield';
 
 const { Header, Sider, Content } = Layout;
 
@@ -78,6 +79,7 @@ function App() {
               <Route path="/map/lst-map" element={<LSTMap/>} />
               <Route path="/map/soil-map" element={<SoilMap/>} />
               <Route path="/map/solar-location" element={<SolarLocation/>} />
+              <Route path="/map/mauza-crop-yield-map" element={<MauzaCropYield/>} />
             </Routes>
           </Content>
         </Layout>

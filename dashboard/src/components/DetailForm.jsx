@@ -139,7 +139,8 @@ const styles = {
   },
   button: {
     marginTop: '30px',
-    background: 'linear-gradient(135deg, #a8e063, #56ab2f)', // Light green gradient
+    // background: 'linear-gradient(135deg, #a8e063, #56ab2f)', // Light green gradient
+    background: 'linear-gradient(135deg, #005500, #007700)', // Dark green gradient 
     color: '#fff',
     border: 'none',
     borderRadius: '4px',

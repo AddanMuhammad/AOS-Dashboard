@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from './components/Card';
 import FieldMapImg from './assets/fieldMap.jpg';
 import FieldMapDetail from './assets/fieldMapDetail.jpeg';
-import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined, PicLeftOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 
 function FieldsMap() {
@@ -71,23 +71,27 @@ function FieldsMap() {
           <button key='1' className="action-btn edit-btn" title="Fields Map">
             <Link to="/map/fields-map"><DeploymentUnitOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='2' className="action-btn edit-btn" title="Crop Yield Map">
+          <button key='2' className="action-btn edit-btn" title="Mauza Crop Yield">
+            <Link to="/map/mauza-crop-yield-map"><PicLeftOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='3' className="action-btn edit-btn" title="Crop Yield Map">
             <Link to="/map/crop-yield-map"><FunnelPlotOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='3' className="action-btn edit-btn" title="LST Map">
+          <button key='4' className="action-btn edit-btn" title="LST Map">
             <Link to="/map/lst-map"><OneToOneOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='4' className="action-btn edit-btn" title="Soil Map">
+          <button key='5' className="action-btn edit-btn" title="Soil Map">
             <Link to="/map/soil-map"><PartitionOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='5' className="action-btn edit-btn" title="Solar Location">
+          <button key='6' className="action-btn edit-btn" title="Solar Location">
             <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='6' className="action-btn edit-btn" title="Mauza Boundary">
+          <button key='7' className="action-btn edit-btn" title="Mauza Boundary">
             <Link to="/map"><AppstoreOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
         </div>
       </div>
+      
     </Card>
   );
 }
@@ -129,7 +133,7 @@ const panelStyle = {
   bottom: 0,
   left: 0,
   right: 0,
-  height: "40%",
+  height: "37%",
   width: "90%",
   backgroundColor: "#F2F3F2",
   boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
@@ -213,7 +217,7 @@ const rightPanelStyle = {
   position: "absolute",
   top: "35%",
   right: "0",
-  height: "31%",
+  height: "36%",
   borderRadius: "10px",
   width: "50px", // Width of the sliding panel
   backgroundColor: "white",
