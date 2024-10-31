@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from './components/Card';
 import FieldMapImg from './assets/fieldMap.jpg';
 import FieldMapDetail from './assets/fieldMapDetail.jpeg';
@@ -10,7 +10,7 @@ function FieldsMap() {
   const selectedKey = location.pathname === '/map/fields-map' ? '1' : location.pathname === '/map/crop-yield-map' ? '2' : location.pathname === '/map/lst-map' ? '3' : location.pathname === '/map/soil-map' ? '4' : '5';
 
   const [isRightPanelVisible, setIsRightPanelVisible] = useState(false);
-  const [isPanelVisible, setIsPanelVisible] = useState(true); // Set initial state to true for the panel to be open by default
+  const [isPanelVisible, setIsPanelVisible] = useState(false); // Start with panel closed initially
   const [panelData, setPanelData] = useState({
     title: "Default Data",
     data: [
@@ -22,6 +22,10 @@ function FieldsMap() {
       { title: "Non-Constructed Area:", value: "26 acres" },
     ],
   });
+
+  useEffect(() => {
+    setIsPanelVisible(true); // Open panel on component mount
+  }, []);
 
   const togglePanel = () => {
     setIsPanelVisible(prev => !prev);
@@ -42,7 +46,7 @@ function FieldsMap() {
         </span>
       </button> 
 
-      <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)" }}>
+      <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)", opacity: isPanelVisible ? 1 : 0 }}>
         <div style={panelContentStyle}>
           <button onClick={togglePanel} style={closeButtonStyle}>
             <span style={{ fontWeight: "bold", fontSize: "20px" }}><DownOutlined /></span>
@@ -87,6 +91,7 @@ function FieldsMap() {
     </Card>
   );
 }
+
 const DataCard = ({ title, value }) => (
   <div style={dataCardStyle}>
     <h4 style={dataTitleStyle}>{title}</h4>
@@ -95,7 +100,7 @@ const DataCard = ({ title, value }) => (
 );
 
 const dataCardStyle = {
-  width: "30%", // Allows three cards per row
+  width: "30%",
   padding: "10px",
   borderRadius: "8px",
   backgroundColor: "#fff",
@@ -125,12 +130,14 @@ const panelStyle = {
   left: 0,
   right: 0,
   height: "40%",
+  width: "90%",
   backgroundColor: "#F2F3F2",
   boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
   borderTopLeftRadius: "15px",
   borderTopRightRadius: "15px",
-  transition: "transform 0.3s ease-in-out",
+  transition: "transform 0.8s ease, opacity 0.5s ease", // Increased duration
   zIndex: 1500,
+  marginLeft: "5%",
 };
 
 const contentContainerStyle = {

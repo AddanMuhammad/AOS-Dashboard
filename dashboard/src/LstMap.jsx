@@ -27,24 +27,31 @@ function LSTMap() {
   });
 
   const [currentImage, setCurrentImage] = useState(LstMarchImg);
+  const [sliderColor, setSliderColor] = useState("#4CAF50");
 
   const handleSliderChange = (value) => {
+    let newColor = "#4CAF50";
     switch (value) {
       case 0:
         setCurrentImage(LstMarchImg);
+        newColor = "#4CAF50";
         break;
       case 1:
         setCurrentImage(LstMayImg);
+        newColor = "#FF9800";
         break;
       case 2:
         setCurrentImage(LstJulyImg);
+        newColor = "#FF5722";
         break;
       case 3:
         setCurrentImage(LstSeptemberImg);
+        newColor = "#9C27B0";
         break;
       default:
         setCurrentImage(LstMarchImg);
     }
+    setSliderColor(newColor);
   };
 
   const togglePanel = () => {
@@ -59,32 +66,42 @@ function LSTMap() {
     <Card>
       <h2>Soil Map</h2>
 
-      {/* Custom Styled Slider for month selection */}
-      <input 
-        type="range" 
-        min="0" 
-        max="3" 
-        step="1" 
-        onChange={(e) => handleSliderChange(Number(e.target.value))} 
-        style={sliderStyle}
-      />
-      
-      {/* Month Labels for the Slider */}
-      <div style={labelContainerStyle}>
-        <span>March</span>
-        <span>May</span>
-        <span>July</span>
-        <span>September</span>
+      {/* Card Container for Slider */}
+      <div style={sliderCardContainerStyle}>
+        <input
+          type="range"
+          min="0"
+          max="3"
+          step="1"
+          onChange={(e) => handleSliderChange(Number(e.target.value))}
+          style={{ ...sliderStyle, background: sliderColor }}
+        />
+
+        {/* Centered Month Labels */}
+        <div style={labelContainerStyle}>
+          <span>March</span>
+          <span>May</span>
+          <span>July</span>
+          <span>September</span>
+        </div>
       </div>
 
+
+
       {/* Image that changes based on slider selection */}
-      <img style={{ width: '100%', height: 'auto', borderRadius: '8px' }} src={currentImage} alt="SoilMapImg" />
+      <img style={{
+        width: '80%',
+        height: 'auto',
+        borderRadius: '8px',
+        display: 'block',
+        margin: '0 auto' // Centering the image
+      }} src={currentImage} alt="SoilMapImg" />
 
-      
 
-      <button onClick={togglePanel} style={roundButtonStyle}>
+
+      {/* <button onClick={togglePanel} style={roundButtonStyle}>
         <span style={{ fontWeight: "bold", fontSize: "20px" }}><UpOutlined /></span>
-      </button> 
+      </button>
 
       <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)" }}>
         <div style={panelContentStyle}>
@@ -100,7 +117,7 @@ function LSTMap() {
             <img style={imageStyle} src={FieldMapDetail} alt="FieldMapDetail" />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div style={{ ...rightPanelStyle, transform: isRightPanelVisible ? "translateX(0)" : "translateX(100%)" }}>
         <button onClick={toggleRightPanel} style={closeRightPanelButtonStyle}>
@@ -109,22 +126,22 @@ function LSTMap() {
 
         <div selectedKeys={[selectedKey]}>
           <button key='1' className="action-btn edit-btn" title="Fields Map">
-            <Link to="/map/fields-map"><DeploymentUnitOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+            <Link to="/map/fields-map"><DeploymentUnitOutlined style={{ color: 'white', fontSize: '15px' }} /></Link>
           </button>
           <button key='2' className="action-btn edit-btn" title="Crop Yield Map">
-            <Link to="/map/crop-yield-map"><FunnelPlotOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+            <Link to="/map/crop-yield-map"><FunnelPlotOutlined style={{ color: 'white', fontSize: '15px' }} /></Link>
           </button>
           <button key='3' className="action-btn edit-btn" title="LST Map">
-            <Link to="/map/lst-map"><OneToOneOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+            <Link to="/map/lst-map"><OneToOneOutlined style={{ color: 'white', fontSize: '15px' }} /></Link>
           </button>
           <button key='4' className="action-btn edit-btn" title="Soil Map">
-            <Link to="/map/soil-map"><PartitionOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+            <Link to="/map/soil-map"><PartitionOutlined style={{ color: 'white', fontSize: '15px' }} /></Link>
           </button>
           <button key='5' className="action-btn edit-btn" title="Solar Location">
-            <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+            <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }} /></Link>
           </button>
           <button key='6' className="action-btn edit-btn" title="Mauza Boundary">
-            <Link to="/map"><AppstoreOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+            <Link to="/map"><AppstoreOutlined style={{ color: 'white', fontSize: '15px' }} /></Link>
           </button>
         </div>
       </div>
@@ -278,24 +295,38 @@ const closeRightPanelButtonStyle = {
   cursor: 'pointer'
 };
 
-const sliderStyle = {
+const sliderCardContainerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
   width: "80%",
-  margin: "20px 0",
+  margin: "5px auto",
+  padding: "15px",
+  borderRadius: "12px",
+  border: "1px solid #ccc",
+  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+  backgroundColor: "#fff",
+};
+
+const sliderStyle = {
+  width: "100%",
   appearance: "none",
   height: "8px",
-  background: "linear-gradient(to right, #4CAF50, #FF9800, #FF5722, #9C27B0)",
   borderRadius: "5px",
   outline: "none",
   cursor: "pointer",
   transition: "background 0.3s ease",
 };
+
 const labelContainerStyle = {
   display: "flex",
   justifyContent: "space-between",
-  width: "80%",
-  marginTop: "-8px",
+  width: "100%",
   color: "#333",
   fontWeight: "bold",
+  textAlign: "center",
+  marginTop: "10px",
 };
 
 export default LSTMap

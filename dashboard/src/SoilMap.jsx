@@ -36,7 +36,7 @@ function SoilMap() {
       <h2>Soil Map</h2>
       <img style={{ width: '100%', height: '90%' }} src={SoilMapImg} alt="SoilMapImg" />
       
-      <button onClick={togglePanel} style={roundButtonStyle}>
+      {/* <button onClick={togglePanel} style={roundButtonStyle}>
         <span style={{ fontWeight: "bold", fontSize: "20px" }}>
           <UpOutlined />
         </span>
@@ -56,7 +56,7 @@ function SoilMap() {
             <img style={imageStyle} src={FieldMapDetail} alt="FieldMapDetail" />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div style={{ ...rightPanelStyle, transform: isRightPanelVisible ? "translateX(0)" : "translateX(100%)" }}>
         <button onClick={toggleRightPanel} style={closeRightPanelButtonStyle}>
