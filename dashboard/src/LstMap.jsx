@@ -59,9 +59,6 @@ function LSTMap() {
     <Card>
       <h2>Soil Map</h2>
 
-      {/* Image that changes based on slider selection */}
-      <img style={{ width: '100%', height: 'auto', borderRadius: '8px' }} src={currentImage} alt="SoilMapImg" />
-
       {/* Custom Styled Slider for month selection */}
       <input 
         type="range" 
@@ -79,6 +76,11 @@ function LSTMap() {
         <span>July</span>
         <span>September</span>
       </div>
+
+      {/* Image that changes based on slider selection */}
+      <img style={{ width: '100%', height: 'auto', borderRadius: '8px' }} src={currentImage} alt="SoilMapImg" />
+
+      
 
       <button onClick={togglePanel} style={roundButtonStyle}>
         <span style={{ fontWeight: "bold", fontSize: "20px" }}><UpOutlined /></span>
