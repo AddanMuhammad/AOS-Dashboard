@@ -4,11 +4,7 @@ import { HomeOutlined, InfoCircleOutlined, EditOutlined, PushpinOutlined } from 
 
 function MenuList() {
   const location = useLocation();
-  const selectedKey = 
-    location.pathname === '/home' ? '1' : 
-    location.pathname === '/create' ? '2' : 
-    location.pathname === '/details' ? '3' : 
-    location.pathname === '/map' ? '4' : '1'; // Default to "1" for the first menu item
+  const selectedKey = location.pathname === '/home' ? '1' : location.pathname === '/create' ? '2' : location.pathname === '/details' ? '3' : '4';
 
   return (
     <Menu theme="light" mode="inline" selectedKeys={[selectedKey]}>
