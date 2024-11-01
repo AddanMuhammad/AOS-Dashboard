@@ -1,24 +1,42 @@
 import { Menu } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { HomeOutlined, InfoCircleOutlined, EditOutlined, PushpinOutlined } from '@ant-design/icons';
 
 function MenuList() {
   const location = useLocation();
-  const selectedKey = location.pathname === '/home' ? '1' : location.pathname === '/create' ? '2' : location.pathname === '/details' ? '3' : '4';
+
+  // Map each route path exactly to its corresponding key
+  const pathToKey = {
+    '/home': '1',
+    '/create': '2',
+    '/details': '3',
+    '/map': '4',
+  };
+
+  // Find the selected key based on the current pathname
+  const selectedKey = pathToKey[location.pathname] || '1'; // Defaults to '1' for '/home'
 
   return (
     <Menu theme="light" mode="inline" selectedKeys={[selectedKey]}>
       <Menu.Item key="1" icon={<HomeOutlined />}>
-        <Link to="/home">Home</Link>
+        <NavLink to="/home" end>
+          Home
+        </NavLink>
       </Menu.Item>
-      <Menu.Item key="2" icon={<EditOutlined />}>
-        <Link to="/create">Create</Link>
-      </Menu.Item>
+      {/* <Menu.Item key="2" icon={<EditOutlined />}>
+        <NavLink to="/create">
+          Create
+        </NavLink>
+      </Menu.Item> */}
       <Menu.Item key="3" icon={<InfoCircleOutlined />}>
-        <Link to="/details">Details</Link>
+        <NavLink to="/details">
+          Grower Info
+        </NavLink>
       </Menu.Item>
       <Menu.Item key="4" icon={<PushpinOutlined />}>
-        <Link to="/map">Map</Link>
+        <NavLink to="/map">
+          Map
+        </NavLink>
       </Menu.Item>
     </Menu>
   );

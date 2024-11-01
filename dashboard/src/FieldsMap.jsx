@@ -36,7 +36,7 @@ function FieldsMap() {
   };
 
   return (
-    <Card height="fit-content">
+    <Card>
       <h2>Fields Map</h2>
       <img style={{ width: '100%', height: '100%' }} src={FieldMapImg} alt="fieldMap" />
       
@@ -129,19 +129,23 @@ const dataValueStyle = {
 };
 
 const panelStyle = {
-  position: "fixed",
+  position: "absolute",
   bottom: 0,
   left: 0,
   right: 0,
-  height: "37%",
-  width: "90%",
+  height: "30%",
+  width: "80%",
   backgroundColor: "#F2F3F2",
+  borderTop: '1px solid #ccc',
+  padding: '10px',
   boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
   borderTopLeftRadius: "15px",
   borderTopRightRadius: "15px",
-  transition: "transform 0.8s ease, opacity 0.5s ease", // Increased duration
+  transition: "transform 1.7s ease, opacity 0.3s ease", // Increased duration
   zIndex: 1500,
+  transform: 'translateY(100%)',
   marginLeft: "5%",
+  overflowY: 'auto',
 };
 
 const contentContainerStyle = {
@@ -217,9 +221,9 @@ const rightPanelStyle = {
   position: "absolute",
   top: "35%",
   right: "0",
-  height: "36%",
+  height: "auto",
   borderRadius: "10px",
-  width: "50px", // Width of the sliding panel
+  width: "50px", 
   backgroundColor: "white",
   boxShadow: "0 0 10px rgba(0,0,0,0.5)",
   transition: "transform 0.3s ease",
@@ -227,6 +231,7 @@ const rightPanelStyle = {
   textAlign: "center",
   padding: "10px 0px 0px 0px"
 };
+
 
 const closeRightPanelButtonStyle = {
   position: 'absolute',

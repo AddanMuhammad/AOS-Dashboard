@@ -31,18 +31,17 @@ const HomeCard = ({ cardsData, cardHeight, cardWidth }) => {
   );
 };
 
-
 // PropTypes validation
 HomeCard.propTypes = {
-  cardSize: PropTypes.string,
   cardsData: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       startDate: PropTypes.string.isRequired,
-
       bgColor: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
+  cardHeight: PropTypes.string,
+  cardWidth: PropTypes.string,
 };
 
 export default HomeCard;

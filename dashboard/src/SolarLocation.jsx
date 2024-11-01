@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from './components/Card';
 import SolarLocationImg from './assets/solarLocation.jpeg';
 import FieldMapDetail from './assets/fieldMapDetail.jpeg';
-import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { UpOutlined, DownOutlined,PicLeftOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 
 function SolarLocation() {
@@ -14,12 +14,12 @@ function SolarLocation() {
   const [panelData, setPanelData] = useState({
     title: "Default Data",
     data: [
-      { title: "Total Area:", value: "3802 acres" },
-      { title: "Field Area:", value: "1934 acres" },
-      { title: "Orchards:", value: "1067 acres" },
-      { title: "Nulla:", value: "57 acres" },
-      { title: "Constructed Area:", value: "606 acres" },
-      { title: "Non-Constructed Area:", value: "26 acres" },
+      { title: "No of Solar:", value: "165" },
+      { title: "Power:", value: "" },
+      // { title: "Orchards:", value: "1067 acres" },
+      // { title: "Nulla:", value: "57 acres" },
+      // { title: "Constructed Area:", value: "606 acres" },
+      // { title: "Non-Constructed Area:", value: "26 acres" },
     ],
   });
 
@@ -34,31 +34,31 @@ function SolarLocation() {
   return (
     <Card>
       <h2>Solar Location</h2>
-      <img style={{ width: '100%', height: '90%' }} src={SolarLocationImg} alt="SolarLocation" />
+      <img style={{ width: '100%', height: '90%' }} src={SolarLocationImg} alt="SolarLocationImg" />
       
-      {/* <button onClick={togglePanel} style={roundButtonStyle}>
-        <span style={{ fontWeight: "bold", fontSize: "20px" }}>
-          <UpOutlined />
-        </span>
-      </button> 
-
-      <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)" }}>
-        <div style={panelContentStyle}>
-          <button onClick={togglePanel} style={closeButtonStyle}>
-            <span style={{ fontWeight: "bold", fontSize: "20px" }}><DownOutlined /></span>
-          </button>
-          <div style={contentContainerStyle}>
-            <div style={dataCardContainer}>
-              {panelData.data.map((item, index) => (
-                <DataCard key={index} title={item.title} value={item.value} />
-              ))}
+      <button onClick={togglePanel} style={roundButtonStyle}>
+          <span style={{ fontWeight: "bold", fontSize: "20px" }}>
+            <UpOutlined />
+          </span>
+        </button> 
+  
+        <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)", opacity: isPanelVisible ? 1 : 0 }}>
+          <div style={panelContentStyle}>
+            <button onClick={togglePanel} style={closeButtonStyle}>
+              <span style={{ fontWeight: "bold", fontSize: "20px" }}><DownOutlined /></span>
+            </button>
+            <div style={contentContainerStyle}>
+              <div style={dataCardContainer}>
+                {panelData.data.map((item, index) => (
+                  <DataCard key={index} title={item.title} value={item.value} />
+                ))}
+              </div>
+              {/* <img style={imageStyle} src={MauzaCropYieldImg} alt="MauzaCropYieldImg" /> */}
             </div>
-            <img style={imageStyle} src={FieldMapDetail} alt="FieldMapDetail" />
           </div>
         </div>
-      </div> */}
 
-      <div style={{ ...rightPanelStyle, transform: isRightPanelVisible ? "translateX(0)" : "translateX(100%)" }}>
+<div style={{ ...rightPanelStyle, transform: isRightPanelVisible ? "translateX(0)" : "translateX(100%)" }}>
         <button onClick={toggleRightPanel} style={closeRightPanelButtonStyle}>
           {isRightPanelVisible ? <RightOutlined /> : <LeftOutlined />}
         </button>
@@ -67,19 +67,22 @@ function SolarLocation() {
           <button key='1' className="action-btn edit-btn" title="Fields Map">
             <Link to="/map/fields-map"><DeploymentUnitOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='2' className="action-btn edit-btn" title="Crop Yield Map">
+          <button key='2' className="action-btn edit-btn" title="Mauza Crop Yield">
+            <Link to="/map/mauza-crop-yield-map"><PicLeftOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='3' className="action-btn edit-btn" title="Crop Yield Map">
             <Link to="/map/crop-yield-map"><FunnelPlotOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='3' className="action-btn edit-btn" title="LST Map">
+          <button key='4' className="action-btn edit-btn" title="LST Map">
             <Link to="/map/lst-map"><OneToOneOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='4' className="action-btn edit-btn" title="Soil Map">
+          <button key='5' className="action-btn edit-btn" title="Soil Map">
             <Link to="/map/soil-map"><PartitionOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='5' className="action-btn edit-btn" title="Solar Location">
+          <button key='6' className="action-btn edit-btn" title="Solar Location">
             <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='6' className="action-btn edit-btn" title="Mauza Boundary">
+          <button key='7' className="action-btn edit-btn" title="Mauza Boundary">
             <Link to="/map"><AppstoreOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
         </div>
@@ -97,13 +100,16 @@ const DataCard = ({ title, value }) => (
 );
 
 const dataCardStyle = {
-  width: "30%", // Allows three cards per row
+  // flex: "1 1 calc(25% - 10px)",
+  width: "30%",
+
   padding: "10px",
   borderRadius: "8px",
   backgroundColor: "#fff",
   boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
   textAlign: "center",
-  marginBottom: "10px",
+
+  overflow: "hidden"
 };
 
 const dataTitleStyle = {
@@ -116,23 +122,32 @@ const dataTitleStyle = {
 
 const dataValueStyle = {
   fontSize: "13px",
-  color: "#333",
+  background: "black",
+  WebkitBackgroundClip: "text",
+  color: "transparent",
   fontWeight: "bold",
   margin: 0,
 };
 
+
 const panelStyle = {
-  position: "fixed",
+  position: "absolute",
   bottom: 0,
   left: 0,
   right: 0,
-  height: "40%",
+  height: "30%",
+  width: "90%",
   backgroundColor: "#F2F3F2",
+  borderTop: '1px solid #ccc',
+  padding: '10px',
   boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
   borderTopLeftRadius: "15px",
   borderTopRightRadius: "15px",
-  transition: "transform 0.3s ease-in-out",
+  transition: "transform 1.7s ease, opacity 0.3s ease", // Increased duration
   zIndex: 1500,
+  transform: 'translateY(100%)',
+  marginLeft: "5%",
+  overflowY: 'auto',
 };
 
 const contentContainerStyle = {
@@ -208,9 +223,9 @@ const rightPanelStyle = {
   position: "absolute",
   top: "35%",
   right: "0",
-  height: "31%",
+  height: "auto",
   borderRadius: "10px",
-  width: "50px", // Width of the sliding panel
+  width: "50px", 
   backgroundColor: "white",
   boxShadow: "0 0 10px rgba(0,0,0,0.5)",
   transition: "transform 0.3s ease",
@@ -218,6 +233,7 @@ const rightPanelStyle = {
   textAlign: "center",
   padding: "10px 0px 0px 0px"
 };
+
 
 const closeRightPanelButtonStyle = {
   position: 'absolute',

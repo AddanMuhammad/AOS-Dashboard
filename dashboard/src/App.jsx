@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Layout } from 'antd';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Logo from './components/Logo';
 import MenuList from './components/MenuList';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
@@ -10,7 +10,7 @@ import Details from './Details';
 import MapScreen from './MapScreen';
 import FieldsMap from './FieldsMap';
 import CropYieldMap from './CropYieldMap';
-import LSTMap from './LSTMap';
+import LSTMap from './LstMap';
 import SoilMap from './SoilMap';
 import SolarLocation from './SolarLocation';
 import MauzaCropYield from './MauzaCropYield';
@@ -27,7 +27,7 @@ function App() {
           collapsed={collapsed}
           collapsible
           trigger={null}
-          className="sidebar" // Applies the gradient background
+          className="sidebar"
         >
           <Logo collapsed={collapsed} />
           <MenuList />
@@ -36,7 +36,7 @@ function App() {
           <Header
             style={{
               padding: 0,
-              backgroundColor: '#f5f5f5', // Set to a light color to remove black background
+              backgroundColor: '#f5f5f5',
             }}
           >
             <div
@@ -69,17 +69,17 @@ function App() {
             }}
           >
             <Routes>
-              <Route path="/" element={<Navigate to="/home" />} />
+              <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/create" element={<Create />} />
               <Route path="/details" element={<Details />} />
               <Route path="/map" element={<MapScreen />} />
-              <Route path="/map/fields-map" element={<FieldsMap/>} />
-              <Route path="/map/crop-yield-map" element={<CropYieldMap/>} />
-              <Route path="/map/lst-map" element={<LSTMap/>} />
-              <Route path="/map/soil-map" element={<SoilMap/>} />
-              <Route path="/map/solar-location" element={<SolarLocation/>} />
-              <Route path="/map/mauza-crop-yield-map" element={<MauzaCropYield/>} />
+              <Route path="/map/fields-map" element={<FieldsMap />} />
+              <Route path="/map/crop-yield-map" element={<CropYieldMap />} />
+              <Route path="/map/lst-map" element={<LSTMap />} />
+              <Route path="/map/soil-map" element={<SoilMap />} />
+              <Route path="/map/solar-location" element={<SolarLocation />} />
+              <Route path="/map/mauza-crop-yield-map" element={<MauzaCropYield />} />
             </Routes>
           </Content>
         </Layout>

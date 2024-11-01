@@ -121,7 +121,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 35px;
+  /* padding: 35px; */
 
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 20px;
@@ -167,12 +167,45 @@
 }
 
 
+/* Home.css */
+
+@media (max-width: 768px) {
+  .cardContainer {
+    padding: 10px;
+  }
+
+  .headerText {
+    font-size: 1.5rem;
+  }
+
+  .subHeaderText {
+    font-size: 0.9rem;
+  }
+
+  .homeCardContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerText {
+    font-size: 1.2rem;
+  }
+
+  .subHeaderText {
+    font-size: 0.8rem;
+  }
+}
+
 
 /* Home Card */
 .ag-format-container {
   width: 100%;
   margin-top: 40px;
   padding: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 body {
@@ -181,12 +214,15 @@ body {
 
 .ag-courses_box {
   display: flex;
-
+  flex-wrap: nowrap; /* Force items to stay in one row */
   gap: 50px;
   justify-content: center;
 }
 
 .ag-courses_item {
+  flex: 1 1 30%; /* Each card will take up approximately a third of the container width */
+  max-width: 300px;
+  min-width: 250px;
   border-radius: 28px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
@@ -200,7 +236,7 @@ body {
   display: block;
   height: 100%;
   width: 100%;
-  padding: 30px 20px;
+  padding: 20px;
   background-color: #034b1b;
   position: relative;
 }
@@ -216,17 +252,18 @@ body {
 }
 
 .ag-courses-item_title {
+  margin: 0 0 15px;
   min-height: 72px;
   margin: 0 0 15px;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 1.5em;
   color: #fff;
   z-index: 2;
   position: relative;
 }
 
 .ag-courses-item_date-box {
-  font-size: 16px;
+  font-size: 1em;
   color: #fff;
   z-index: 2;
   position: relative;
@@ -239,16 +276,15 @@ body {
 }
 
 .ag-courses-item_bg {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
   background-color: #cfc6a8;
   position: absolute;
-  top: -75px;
-  right: -75px;
+  top: -50px;
+  right: -50px;
   border-radius: 50%;
   transition: all 0.5s ease;
 }
-
 .ag-courses_item:nth-child(2n) .ag-courses-item_bg {
   background-color: #3ecd5e;
 }
@@ -258,35 +294,41 @@ body {
 }
 
 @media only screen and (max-width: 979px) {
+  .ag-courses_box {
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  }
+
   .ag-courses_item {
-    height: 250px;
-    width: 250px;
+    flex: 1 1 45%; /* Each card will take up approximately half the container width on medium screens */
   }
 }
 
 @media only screen and (max-width: 767px) {
   .ag-courses_item {
-    height: 200px;
-    width: 200px;
-  }
-}
-
-@media only screen and (max-width: 639px) {
-  .ag-courses_item {
-    height: 150px;
-    width: 150px;
+    flex: 1 1 100%; /* Each card will take the full width on smaller screens */
+    max-width: 100%;
   }
 
   .ag-courses-item_title {
-    font-size: 18px;
-  }
-
-  .ag-courses-item_date-box {
-    font-size: 14px;
+    font-size: 1.2em;
   }
 
   .ag-courses-item_link {
     padding: 15px;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .ag-courses-item_title {
+    font-size: 1em;
+  }
+
+  .ag-courses-item_date-box {
+    font-size: 0.9em;
+  }
+
+  .ag-courses-item_link {
+    padding: 10px;
   }
 }
 
@@ -558,7 +600,7 @@ thead th:hover span.icon-arrow {
 }
 
 thead th:hover {
-  color: #6c00bd;
+  color: #ffdbac;
 }
 
 thead th.active span.icon-arrow {

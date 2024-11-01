@@ -9,9 +9,9 @@ const MapComponent = () => {
   const mapRef = useRef(null);
   const selectedLayerRef = useRef(null);
   const mapRefInstance = useRef();
-  const [selectedDivision, setSelectedDivision] = useState('');
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedTehsil, setSelectedTehsil] = useState('');
+  const [selectedDivision, setSelectedDivision] = useState('Bahawalpur');
+  const [selectedDistrict, setSelectedDistrict] = useState('Rahim Yar Khan');
+  const [selectedTehsil, setSelectedTehsil] = useState('Sadiqabad');
   const [selectedMouza, setSelectedMouza] = useState('');
   const [selectedGrwName, setSelectedGrwName] = useState('');
   const [isPanelVisible, setIsPanelVisible] = useState(false);
@@ -97,7 +97,7 @@ const MapComponent = () => {
         setPanelData({
           title: selectedFeature.properties.Grw__Name || "N/A",
           data: [
-            { title: "Grw Name:", value: selectedFeature.properties.Grw__Name || "N/A" },
+            { title: "Grower Name:", value: selectedFeature.properties.Grw__Name || "N/A" },
             { title: "Father Name:", value: selectedFeature.properties.Father_Nam || "N/A" },
             { title: "CNIC:", value: selectedFeature.properties.CNIC || "N/A" },
             { title: "Phone No:", value: selectedFeature.properties.Phone_no || "N/A" },
@@ -127,22 +127,19 @@ const MapComponent = () => {
       if (selectedGrwName) {
         const selectedFeature = newJSON.features.find(feature => feature.properties.Grw__Name === selectedGrwName);
         if (selectedFeature) {
-          // Reset previous layer style and unbind tooltip
           if (selectedLayerRef.current) {
-            selectedLayerRef.current.setStyle({ color: "yellow", weight: 1 }); // Reset to yellow
-            selectedLayerRef.current.unbindTooltip();  // Remove previous tooltip
+            selectedLayerRef.current.setStyle({ color: "yellow", weight: 1 });
+            selectedLayerRef.current.unbindTooltip();
           }
 
-          // Add new layer with Grw_Code tooltip
           const layer = L.geoJSON(selectedFeature, {
             style: { color: "red", weight: 3 }
           });
 
-          selectedLayerRef.current = layer;  // Set the new layer as selected
+          selectedLayerRef.current = layer;
           layer.addTo(mapRefInstance.current);
 
-          // Bind the Grw_Code as a tooltip to the selected layer
-          layer.bindTooltip(`Grw Code: ${selectedFeature.properties.Grw__Code}`, {
+          layer.bindTooltip(`Grower Code: ${selectedFeature.properties.Grw__Code}`, {
             permanent: true,
             direction: 'top'
           }).openTooltip();
@@ -190,7 +187,7 @@ const MapComponent = () => {
           ))}
         </select>
         <select onChange={(e) => setSelectedGrwName(e.target.value)} value={selectedGrwName} style={selectStyle}>
-          <option value="">Select Grw Name</option>
+          <option value="">Select Grower Name</option>
           {grwNames.map(grwName => (
             <option key={grwName} value={grwName}>{grwName}</option>
           ))}
@@ -262,22 +259,30 @@ const DataCard = ({ title, value }) => (
 // Styles
 const filterContainerStyle = {
   position: "absolute",
-  top: "7%",
+  top: "4%",
   left: "50%",
   transform: "translateX(-50%)",
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
   zIndex: 1000,
   background: "rgba(255, 255, 255, 0.6)",
   padding: "10px",
   borderRadius: "5px",
   boxShadow: "0 2px 10px rgba(0,0,0,0.5)",
-  display: "flex",
+  
   alignItems: "center",
   gap: "10px",
   maxWidth: "90%",
   overflow: "hidden",
 };
 
+
+
 const selectStyle = {
+  flex: '1 1 120px',
+  minWidth: '120px',
+  
   padding: "8px",
   borderRadius: "4px",
   border: "1px solid rgba(0, 0, 0, 0.6)",
@@ -292,14 +297,16 @@ const selectStyle = {
 };
 
 const buttonStyle = {
-  padding: "8px 16px",
-  borderRadius: "4px",
+  padding: '10px 15px',
+  borderRadius: "5px",
   border: "none",
   backgroundColor: "#1fd655",
   color: "white",
   fontSize: "14px",
   cursor: "pointer",
   transition: "background-color 0.3s",
+  alignSelf: 'center',
+    flexShrink: 0,
 };
 
 const roundButtonStyle = {
@@ -346,19 +353,23 @@ const rightToggleButtonStyle = {
 };
 
 const panelStyle = {
-  position: "fixed",
+  position: "absolute",
   bottom: 0,
   left: 0,
   right: 0,
   height: "30%",
   width: "90%",
   backgroundColor: "#F2F3F2",
+  borderTop: '1px solid #ccc',
+  padding: '10px',
   boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
   borderTopLeftRadius: "15px",
   borderTopRightRadius: "15px",
   transition: "transform 1.7s ease, opacity 0.3s ease", // Increased duration
   zIndex: 1500,
+  transform: 'translateY(100%)',
   marginLeft: "5%",
+  overflowY: 'auto',
 };
 
 const panelContentStyle = {
@@ -431,9 +442,9 @@ const rightPanelStyle = {
   position: "absolute",
   top: "35%",
   right: "0",
-  height: "37%",
+  height: "auto",
   borderRadius: "10px",
-  width: "50px", // Width of the sliding panel
+  width: "50px", 
   backgroundColor: "white",
   boxShadow: "0 0 10px rgba(0,0,0,0.5)",
   transition: "transform 0.3s ease",

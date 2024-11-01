@@ -28,8 +28,8 @@ const initialData = newJSON.features
 
 const headers = [
   { label: "Sr.", key: "sr" },
-  { label: "Grw.code", key: "grw_code" },
-  { label: "Grw.name", key: "grw_name" },
+  { label: "Grower code", key: "grw_code" },
+  { label: "Grower name", key: "grw_name" },
   { label: "Father name", key: "father_name" },
   { label: "September", key: "september" },
   { label: "Ratoon", key: "ratoon" },
@@ -86,7 +86,7 @@ function TableComponent() {
 
     // Check if required fields are filled
     if (!String(selectedRow.grw_name).trim()) {
-      errors.grw_name = "Grw Name is required.";
+      errors.grw_name = "Grower Name is required.";
     }
 
     if (!String(selectedRow.father_name).trim()) {
@@ -216,7 +216,7 @@ function TableComponent() {
     <div>
       <main className="table">
         <section className="table__header">
-          <h1>Farmer's Information</h1>
+          <h1>Grower Information</h1>
           <div className="input-group">
             <input
               type="search"
@@ -282,7 +282,7 @@ function TableComponent() {
         {/* Modal for editing */}
         {selectedRow && (
           <Modal
-            title="Edit Farmer Info"
+            title="Edit Grower Info"
             open={isModalOpen}
             onOk={handleOk}
             onCancel={handleCancel}
@@ -295,12 +295,12 @@ function TableComponent() {
               {/* First row of fields */}
               <div className="input-group">
                 <div className="input-wrapper">
-                  <label>Grw Name</label>
+                  <label>Grower Name</label>
                   <Input
                     name="grw_name"
                     value={selectedRow.grw_name}
                     onChange={handleInputChange}
-                    placeholder="Grw Name"
+                    placeholder="Grower Name"
                   />
                   {validationErrors.grw_name && (
                     <div className="error-message">{validationErrors.grw_name}</div>
