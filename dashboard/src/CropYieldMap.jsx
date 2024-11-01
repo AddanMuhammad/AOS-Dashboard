@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from './components/Card';
 import GrwYieldArea from './assets/grwYieldArea.jpg';
 import GrwYieldAreaDetail from './assets/grwCropYieldDetail.jpeg';
-import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { UpOutlined, DownOutlined, PicLeftOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 
 function CropYieldMap() {
@@ -36,7 +36,7 @@ function CropYieldMap() {
   };
 
   return (
-    <Card height="fit-content">
+    <Card>
       <h2>Crop Yield Map</h2>
       <img style={{ width: '100%', height: '100%' }} src={GrwYieldArea} alt="fieldMap" />
       
@@ -71,19 +71,22 @@ function CropYieldMap() {
           <button key='1' className="action-btn edit-btn" title="Fields Map">
             <Link to="/map/fields-map"><DeploymentUnitOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='2' className="action-btn edit-btn" title="Crop Yield Map">
+          <button key='2' className="action-btn edit-btn" title="Mauza Crop Yield">
+            <Link to="/map/mauza-crop-yield-map"><PicLeftOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
+          </button>
+          <button key='3' className="action-btn edit-btn" title="Crop Yield Map">
             <Link to="/map/crop-yield-map"><FunnelPlotOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='3' className="action-btn edit-btn" title="LST Map">
+          <button key='4' className="action-btn edit-btn" title="LST Map">
             <Link to="/map/lst-map"><OneToOneOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='4' className="action-btn edit-btn" title="Soil Map">
+          <button key='5' className="action-btn edit-btn" title="Soil Map">
             <Link to="/map/soil-map"><PartitionOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='5' className="action-btn edit-btn" title="Solar Location">
+          <button key='6' className="action-btn edit-btn" title="Solar Location">
             <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='6' className="action-btn edit-btn" title="Mauza Boundary">
+          <button key='7' className="action-btn edit-btn" title="Mauza Boundary">
             <Link to="/map"><AppstoreOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
         </div>
@@ -125,19 +128,23 @@ const dataValueStyle = {
 };
 
 const panelStyle = {
-  position: "fixed",
+  position: "absolute",
   bottom: 0,
   left: 0,
   right: 0,
-  height: "35%",
+  height: "30%",
   width: "90%",
   backgroundColor: "#F2F3F2",
+  borderTop: '1px solid #ccc',
+  padding: '10px',
   boxShadow: "0 -2px 10px rgba(0,0,0,0.2)",
   borderTopLeftRadius: "15px",
   borderTopRightRadius: "15px",
-  transition: "transform 0.8s ease, opacity 0.5s ease", // Increased duration
+  transition: "transform 1.7s ease, opacity 0.3s ease", // Increased duration
   zIndex: 1500,
+  transform: 'translateY(100%)',
   marginLeft: "5%",
+  overflowY: 'auto',
 };
 
 const contentContainerStyle = {
@@ -213,9 +220,9 @@ const rightPanelStyle = {
   position: "absolute",
   top: "35%",
   right: "0",
-  height: "31%",
+  height: "auto",
   borderRadius: "10px",
-  width: "50px", // Width of the sliding panel
+  width: "50px", 
   backgroundColor: "white",
   boxShadow: "0 0 10px rgba(0,0,0,0.5)",
   transition: "transform 0.3s ease",
@@ -223,6 +230,7 @@ const rightPanelStyle = {
   textAlign: "center",
   padding: "10px 0px 0px 0px"
 };
+
 
 const closeRightPanelButtonStyle = {
   position: 'absolute',

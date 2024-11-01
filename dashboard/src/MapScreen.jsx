@@ -4,7 +4,7 @@ import MapComponent from './components/MapComponent'
 
 function MapScreen() {
   return (
-    <Card>
+    <Card padding='10px'>
       <MapComponent />
     </Card>
   )

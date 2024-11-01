@@ -10,7 +10,7 @@ import Details from './Details';
 import MapScreen from './MapScreen';
 import FieldsMap from './FieldsMap';
 import CropYieldMap from './CropYieldMap';
-import LSTMap from './LSTMap';
+import LSTMap from './LstMap';
 import SoilMap from './SoilMap';
 import SolarLocation from './SolarLocation';
 import MauzaCropYield from './MauzaCropYield';
@@ -69,17 +69,17 @@ function App() {
             }}
           >
             <Routes>
-              <Route path="/" element={<Navigate to="/home" />} />
+              <Route path="/AOS-Dashboard/" element={<Navigate to="/map" />} /> {/* Redirect to /map on load */}
               <Route path="/home" element={<Home />} />
               <Route path="/create" element={<Create />} />
               <Route path="/details" element={<Details />} />
               <Route path="/map" element={<MapScreen />} />
-              <Route path="/map/fields-map" element={<FieldsMap/>} />
-              <Route path="/map/crop-yield-map" element={<CropYieldMap/>} />
-              <Route path="/map/lst-map" element={<LSTMap/>} />
-              <Route path="/map/soil-map" element={<SoilMap/>} />
-              <Route path="/map/solar-location" element={<SolarLocation/>} />
-              <Route path="/map/mauza-crop-yield-map" element={<MauzaCropYield/>} />
+              <Route path="/map/fields-map" element={<FieldsMap />} />
+              <Route path="/map/crop-yield-map" element={<CropYieldMap />} />
+              <Route path="/map/lst-map" element={<LSTMap />} />
+              <Route path="/map/soil-map" element={<SoilMap />} />
+              <Route path="/map/solar-location" element={<SolarLocation />} />
+              <Route path="/map/mauza-crop-yield-map" element={<MauzaCropYield />} />
             </Routes>
           </Content>
         </Layout>

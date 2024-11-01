@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { SearchOutlined, EditOutlined, DeleteOutlined, EyeOutlined, DownloadOutlined } from '@ant-design/icons';
+import { SearchOutlined, EditOutlined, DeleteOutlined,  EyeOutlined, DownloadOutlined } from '@ant-design/icons';
 import { Button, Modal, Input } from 'antd';
 import Pagination from './Pagination';
 import { toast } from 'react-toastify';
 import { newJSON } from '../json/Json';
+import { NavLink } from 'react-router-dom';
 
 const initialData = newJSON.features
   .map((feature, index) => {
@@ -28,8 +29,8 @@ const initialData = newJSON.features
 
 const headers = [
   { label: "Sr.", key: "sr" },
-  { label: "Grw.code", key: "grw_code" },
-  { label: "Grw.name", key: "grw_name" },
+  { label: "Grower code", key: "grw_code" },
+  { label: "Grower name", key: "grw_name" },
   { label: "Father name", key: "father_name" },
   { label: "September", key: "september" },
   { label: "Ratoon", key: "ratoon" },
@@ -54,6 +55,9 @@ function TableComponent() {
   const [deleteId, setDeleteId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [validationErrors, setValidationErrors] = useState({});
+
+
+  
 
   const itemsPerPage = 7;
 
@@ -86,7 +90,7 @@ function TableComponent() {
 
     // Check if required fields are filled
     if (!String(selectedRow.grw_name).trim()) {
-      errors.grw_name = "Grw Name is required.";
+      errors.grw_name = "Grower Name is required.";
     }
 
     if (!String(selectedRow.father_name).trim()) {
@@ -216,7 +220,7 @@ function TableComponent() {
     <div>
       <main className="table">
         <section className="table__header">
-          <h1>Farmer's Information</h1>
+          <h1>Grower Information</h1>
           <div className="input-group">
             <input
               type="search"
@@ -237,6 +241,18 @@ function TableComponent() {
               Download
             </Button>
           </div>
+          <NavLink to="/create">
+          <div className="export__file">
+            <Button style={{
+              background: 'rgb(51, 139, 147)',
+
+              color: 'white',
+            }} type="primary" shape="round" icon={<EditOutlined />} >
+              Create
+            </Button>
+          </div>
+          </NavLink>
+          
         </section>
 
         <section className="table__body">
@@ -282,7 +298,7 @@ function TableComponent() {
         {/* Modal for editing */}
         {selectedRow && (
           <Modal
-            title="Edit Farmer Info"
+            title="Edit Grower Info"
             open={isModalOpen}
             onOk={handleOk}
             onCancel={handleCancel}
@@ -295,12 +311,12 @@ function TableComponent() {
               {/* First row of fields */}
               <div className="input-group">
                 <div className="input-wrapper">
-                  <label>Grw Name</label>
+                  <label>Grower Name</label>
                   <Input
                     name="grw_name"
                     value={selectedRow.grw_name}
                     onChange={handleInputChange}
-                    placeholder="Grw Name"
+                    placeholder="Grower Name"
                   />
                   {validationErrors.grw_name && (
                     <div className="error-message">{validationErrors.grw_name}</div>

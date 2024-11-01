@@ -1,43 +1,62 @@
-import React from 'react'
-import Card from './components/Card'
-import HomeCard from './components/HomeCard'
+import React from 'react';
+import Card from './components/Card';
+import HomeCard from './components/HomeCard';
 
 function Home() {
   const cardsData = [
     {
       title: 'Total Farmers',
       startDate: '12345',
-
-    
-      bgColor: '#6B8E23', // Olive green      
+      bgColor: '#6B8E23',
     },
     {
       title: 'Total Area',
       startDate: '12345',
-
-      bgColor: '#6B8E23', // Olive green      
-     
+      bgColor: '#6B8E23',
     },
     {
       title: 'Constructed Area',
       startDate: '12345',
-
-      
-      bgColor: '#6B8E23', // Olive green      
+      bgColor: '#6B8E23',
     },
   ];
+
   return (
-    <Card >
-      <div style={{
-        fontSize: '30px',
-        fontWeight: 'bold',
-      }}> Dashboard </div>
-      <div style={{ fontSize: '17px' }}> Hi, Farmer. Welcome back to Admin! </div>
-      <div>
-        <HomeCard cardsData={cardsData} cardHeight="30vh" cardWidth="21vw" />
+    <Card style={styles.cardContainer}>
+      <div style={styles.headerText}>Dashboard Under-Development</div>
+      <div style={styles.subHeaderText}>Hi, Farmer. Welcome back to Admin!</div>
+      <div style={styles.homeCardContainer}>
+        <HomeCard cardsData={cardsData} cardHeight="30vh" cardWidth="100%" />
       </div>
     </Card>
-  )
+  );
 }
 
-export default Home
+const styles = {
+  cardContainer: {
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '20px',
+  },
+  headerText: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    textAlign: 'left',
+  },
+  subHeaderText: {
+    fontSize: '1rem',
+    textAlign: 'left',
+  },
+  homeCardContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '20px',
+    width: '100%',
+  },
+};
+
+
+export default Home;
