@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const HomeCard = ({ cardsData, cardHeight, cardWidth }) => {
+const HomeCard = ({ cardsData }) => {
   return (
     <div className="ag-format-container">
       <div className="ag-courses_box">
@@ -10,8 +10,7 @@ const HomeCard = ({ cardsData, cardHeight, cardWidth }) => {
             key={index}
             className="ag-courses_item"
             style={{
-              height: cardHeight,
-              width: cardWidth,
+              // Remove fixed height and width; it'll be controlled by CSS
             }}
           >
             <div className="ag-courses-item_link">
@@ -40,8 +39,6 @@ HomeCard.propTypes = {
       bgColor: PropTypes.string.isRequired,
     })
   ).isRequired,
-  cardHeight: PropTypes.string,
-  cardWidth: PropTypes.string,
 };
 
 export default HomeCard;

@@ -1,13 +1,14 @@
 import React from "react";
-import { FireFilled } from "@ant-design/icons";
+import LogoImg from '../assets/logo.png';
+// import { FireFilled } from "@ant-design/icons";
 
 const Logo = ({ collapsed }) => {
   return (
     <div className={`logo-container ${collapsed ? 'collapsed' : ''}`}>
       <div className="logo-icon">
-        <FireFilled />
+      <img style={{ width: '100%', height: '100%' }}  src={LogoImg} alt="fieldMap" />
       </div>
-      {!collapsed && <span className="logo-text">Zar’aat Dost</span>}
+      {!collapsed && <span className="logo-text">PSIC</span>}
     </div>
   );
 };

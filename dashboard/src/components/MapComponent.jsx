@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { UpOutlined, DownOutlined, LeftOutlined, RightOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, OneToOneOutlined, PartitionOutlined, ProfileOutlined, AppstoreOutlined, PicLeftOutlined } from '@ant-design/icons';
+import React, { useEffect, useState, useRef } from "react";
+import { UpOutlined, DownOutlined, DeploymentUnitOutlined, FunnelPlotOutlined, LeftOutlined, RightOutlined, PicLeftOutlined } from '@ant-design/icons';
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { newJSON } from '../json/Json';
@@ -9,9 +9,9 @@ const MapComponent = () => {
   const mapRef = useRef(null);
   const selectedLayerRef = useRef(null);
   const mapRefInstance = useRef();
-  const [selectedDivision, setSelectedDivision] = useState('Bahawalpur');
-  const [selectedDistrict, setSelectedDistrict] = useState('Rahim Yar Khan');
-  const [selectedTehsil, setSelectedTehsil] = useState('Sadiqabad');
+  const [selectedDivision, setSelectedDivision] = useState('Lahore');
+  const [selectedDistrict, setSelectedDistrict] = useState('Sundar(Lahore2)');
+  const [selectedTehsil, setSelectedTehsil] = useState('');
   const [selectedMouza, setSelectedMouza] = useState('');
   const [selectedGrwName, setSelectedGrwName] = useState('');
   const [isPanelVisible, setIsPanelVisible] = useState(false);
@@ -19,12 +19,14 @@ const MapComponent = () => {
   const [panelData, setPanelData] = useState({
     title: "Default Data",
     data: [
-      { title: "Total Area:", value: "3792 acres" },
-      { title: "Field Area:", value: "2.1 acres" },
-      { title: "Orchards:", value: "15.3 acres" },
-      { title: "Constructed Area:", value: "0 acres" },
-      { title: "Non-Constructed Area:", value: "177.4 acres" },
-      { title: "Yield Area:", value: "177.4 acres" },
+      { title: "Industrial Name:", value: "N/A" },
+      { title: "Owner Name:", value: "N/A" },
+      { title: "Phone Number:", value: "N/A" },
+      { title: "CNIC:", value: "N/A" },
+      { title: "Type of Allottment:", value: "N/A" },
+      { title: "Industry Type:", value: "N/A" },
+      { title: "Email:", value: "N/A" },
+      { title: "Address:", value: "N/A" },
     ],
   });
 
@@ -36,11 +38,21 @@ const MapComponent = () => {
   };
 
   // Extract unique values for dropdowns
-  const divisions = [...new Set(newJSON.features.map(feature => feature.properties.Division))];
-  const districts = [...new Set(newJSON.features.map(feature => feature.properties.District))];
-  const tehsils = [...new Set(newJSON.features.map(feature => feature.properties.Tehsil))];
-  const mouzas = [...new Set(newJSON.features.map(feature => feature.properties.Mouza))];
-  const grwNames = [...new Set(newJSON.features.map(feature => feature.properties.Grw__Name))];
+  const divisions = [...new Set(newJSON.features.map(feature => feature.properties.Region))];
+  const districts = [...new Set(newJSON.features.map(feature => feature.properties.Estate))];
+  const tehsils = [...new Set(newJSON.features.map(feature => feature.properties.P_Status))];
+  const industryTypes = [...new Set(newJSON.features.map(feature => feature.properties.Industry_T))];
+  const unitNumbers = [...new Set(newJSON.features.map(feature => feature.properties.Unit_No))];
+
+  // Filter Industry Types based on selected Project Status (Tehsil)
+  const filteredIndustryTypes = selectedTehsil 
+    ? [...new Set(newJSON.features.filter(feature => feature.properties.P_Status === selectedTehsil).map(feature => feature.properties.Industry_T))] 
+    : [];
+
+  // Filter Unit Numbers based on selected Project Status and Industry Type
+  const filteredUnitNumbers = selectedTehsil && selectedMouza
+    ? [...new Set(newJSON.features.filter(feature => feature.properties.P_Status === selectedTehsil && feature.properties.Industry_T === selectedMouza).map(feature => feature.properties.Unit_No))]
+    : [];
 
   useEffect(() => {
     mapRefInstance.current = L.map(mapRef.current).setView([30.3753, 69.3451], 11);
@@ -78,15 +90,15 @@ const MapComponent = () => {
     }
 
     let filteredFeatures = newJSON.features.filter(feature => (
-      feature.properties.Division === selectedDivision &&
-      feature.properties.District === selectedDistrict &&
-      feature.properties.Tehsil === selectedTehsil &&
-      feature.properties.Mouza === selectedMouza
+      feature.properties.Region === selectedDivision &&
+      feature.properties.Estate === selectedDistrict &&
+      feature.properties.P_Status === selectedTehsil &&
+      feature.properties.Industry_T === selectedMouza
     ));
 
     if (selectedGrwName) {
       filteredFeatures = filteredFeatures.filter(feature =>
-        feature.properties.Grw__Name === selectedGrwName
+        feature.properties.Unit_No === selectedGrwName
       );
 
       if (filteredFeatures.length === 0) {
@@ -95,14 +107,16 @@ const MapComponent = () => {
       } else {
         const selectedFeature = filteredFeatures[0];
         setPanelData({
-          title: selectedFeature.properties.Grw__Name || "N/A",
+          title: selectedFeature.properties.Unit_No || "N/A",
           data: [
-            { title: "Grower Name:", value: selectedFeature.properties.Grw__Name || "N/A" },
-            { title: "Father Name:", value: selectedFeature.properties.Father_Nam || "N/A" },
-            { title: "CNIC:", value: selectedFeature.properties.CNIC || "N/A" },
-            { title: "Phone No:", value: selectedFeature.properties.Phone_no || "N/A" },
-            { title: "Area:", value: selectedFeature.properties.Area || "N/A" },
-            { title: "Ratoon:", value: selectedFeature.properties.Ratoon || "N/A" },
+            { title: "Industrial Name:", value: selectedFeature.properties.Industrial || "N/A" },
+            { title: "Owner Name:", value: selectedFeature.properties.Name___Fat || "N/A" },
+            { title: "Phone Number:", value: selectedFeature.properties.Phone || "N/A" },
+            { title: "CNIC:", value: selectedFeature.properties.CNIC_No || "N/A" },
+            { title: "Type of Allottment:", value: selectedFeature.properties.Type_of__A || "N/A" },
+            { title: "Industry Type:", value: selectedFeature.properties.Industry_T || "N/A" },
+            { title: "Email:", value: selectedFeature.properties.Email || "N/A" },
+            { title: "Address:", value: selectedFeature.properties.Current_Ad || "N/A" },
           ]
         });
       }
@@ -125,7 +139,7 @@ const MapComponent = () => {
       mapRefInstance.current.flyToBounds(bounds, { duration: 1.5 });
 
       if (selectedGrwName) {
-        const selectedFeature = newJSON.features.find(feature => feature.properties.Grw__Name === selectedGrwName);
+        const selectedFeature = newJSON.features.find(feature => feature.properties.Unit_No === selectedGrwName);
         if (selectedFeature) {
           if (selectedLayerRef.current) {
             selectedLayerRef.current.setStyle({ color: "yellow", weight: 1 });
@@ -139,7 +153,7 @@ const MapComponent = () => {
           selectedLayerRef.current = layer;
           layer.addTo(mapRefInstance.current);
 
-          layer.bindTooltip(`Grower Code: ${selectedFeature.properties.Grw__Code}`, {
+          layer.bindTooltip(`Parcel ID: ${selectedFeature.properties.Parcel_ID}`, {
             permanent: true,
             direction: 'top'
           }).openTooltip();
@@ -163,32 +177,32 @@ const MapComponent = () => {
       <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
       <div style={filterContainerStyle}>
         <select onChange={(e) => setSelectedDivision(e.target.value)} value={selectedDivision} style={selectStyle}>
-          <option value="">Select Division</option>
+          <option value="">Region</option>
           {divisions.map(division => (
             <option key={division} value={division}>{division}</option>
           ))}
         </select>
         <select onChange={(e) => setSelectedDistrict(e.target.value)} value={selectedDistrict} style={selectStyle}>
-          <option value="">Select District</option>
+          <option value="">Estate</option>
           {districts.map(district => (
             <option key={district} value={district}>{district}</option>
           ))}
         </select>
         <select onChange={(e) => setSelectedTehsil(e.target.value)} value={selectedTehsil} style={selectStyle}>
-          <option value="">Select Tehsil</option>
+          <option value="">Project Status</option>
           {tehsils.map(tehsil => (
             <option key={tehsil} value={tehsil}>{tehsil}</option>
           ))}
         </select>
         <select onChange={(e) => setSelectedMouza(e.target.value)} value={selectedMouza} style={selectStyle}>
-          <option value="">Select Mouza</option>
-          {mouzas.map(mouza => (
+          <option value="">Industry Type</option>
+          {filteredIndustryTypes.map(mouza => (
             <option key={mouza} value={mouza}>{mouza}</option>
           ))}
         </select>
         <select onChange={(e) => setSelectedGrwName(e.target.value)} value={selectedGrwName} style={selectStyle}>
-          <option value="">Select Grower Name</option>
-          {grwNames.map(grwName => (
+          <option value="">Unit No</option>
+          {filteredUnitNumbers.map(grwName => (
             <option key={grwName} value={grwName}>{grwName}</option>
           ))}
         </select>
@@ -198,8 +212,6 @@ const MapComponent = () => {
       <button onClick={togglePanel} style={roundButtonStyle}>
         <span style={{ fontWeight: "bold", fontSize: "20px" }}><UpOutlined /></span>
       </button>
-
-
 
       <div style={{ ...rightPanelStyle, transform: isRightPanelVisible ? "translateX(0)" : "translateX(100%)" }}>
         <button onClick={toggleRightPanel} style={closeRightPanelButtonStyle}>
@@ -213,24 +225,7 @@ const MapComponent = () => {
           <button key='2' className="action-btn edit-btn" title="Mauza Crop Yield">
             <Link to="/map/mauza-crop-yield-map"><PicLeftOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
           </button>
-          <button key='3' className="action-btn edit-btn" title="Crop Yield Map">
-            <Link to="/map/crop-yield-map"><FunnelPlotOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
-          </button>
-          <button key='4' className="action-btn edit-btn" title="LST Map">
-            <Link to="/map/lst-map"><OneToOneOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
-          </button>
-          <button key='5' className="action-btn edit-btn" title="Soil Map">
-            <Link to="/map/soil-map"><PartitionOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
-          </button>
-          <button key='6' className="action-btn edit-btn" title="Solar Location">
-            <Link to="/map/solar-location"><ProfileOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
-          </button>
-          <button key='7' className="action-btn edit-btn" title="Mauza Boundary">
-            <Link to="/map"><AppstoreOutlined style={{ color: 'white', fontSize: '15px' }}/></Link>
-          </button>
         </div>
-
-
       </div>
 
       <div style={{ ...panelStyle, transform: isPanelVisible ? "translateY(0)" : "translateY(100%)" }}>
@@ -407,14 +402,18 @@ const dataCardContainer = {
 
 const dataCardStyle = {
   // flex: "1 1 calc(25% - 10px)",
-  width: "30%",
+  width: "calc(25% - 10px)",
 
   padding: "10px",
-  borderRadius: "8px",
-  backgroundColor: "#fff",
-  boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+  borderRadius: "5px",
+  background: "#f9f9f9",
+  boxShadow: "0 1px 3px rgba(0, 0, 0, 0.12)",
   textAlign: "center",
-
+  display: "flex", 
+  flexDirection: "column",
+  justifyContent: "center",           // Centers content vertically
+  alignItems: "center",               // Centers content horizontally
+  
   overflow: "hidden",
 };
 

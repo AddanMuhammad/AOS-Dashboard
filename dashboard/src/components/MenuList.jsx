@@ -28,12 +28,12 @@ function MenuList() {
         <NavLink to="/create">
           Create
         </NavLink>
-      </Menu.Item> */}
+      </Menu.Item>
       <Menu.Item key="4" icon={<InfoCircleOutlined />}>
         <NavLink to="/details">
           Grower Info
         </NavLink>
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item key="5" icon={<PushpinOutlined />}>
         <NavLink to="/map">
           Map

@@ -59,7 +59,7 @@ function App() {
                   fontWeight: 'bold',
                 }}
               >
-                Zar’aat Dost Dashboard,
+                PSIC Dashboard,
               </span>
             </div>
           </Header>
